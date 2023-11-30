@@ -1,0 +1,47 @@
+.App {
+  text-align: center;
+  display: grid;
+  grid-template-columns: 35% 65%;
+}
+
+.map {
+  display: inline-block;
+  /* width: 65%; */
+  vertical-align: top;
+}
+
+.command {
+  border-radius: 5%;
+  padding: 3%;
+  margin: 2%;
+}
+
+.repl {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #a2a8d3; 
+    
+}
+
+.repl-history {      
+  height: 77.5vh; 
+  overflow: scroll; 
+  width: 100%; 
+}
+
+.repl-command-box {
+  height: 9vh;
+  font-size: large;
+  background-color: #a2a8d3;
+} 
+
+.box {
+  position: absolute;
+  top: 10px; /* Adjust the top position as needed */
+  right: 10px; /* Adjust the right position as needed */
+  background-color: #fff;
+  font-family: 'Times New Roman', Times, serif;
+  padding: 10px;
+}
