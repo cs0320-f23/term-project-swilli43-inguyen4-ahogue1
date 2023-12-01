@@ -73,6 +73,7 @@ export function JournalInput(props: JournalInputProps) {
         value={entry}
         setValue={setEntry}
         ariaLabel={"Journal entry"}
+        placeholder="Enter response here..."
         onKeyPress={(e) => handleKeyPress(e, entry)}
         // onInput={(e) => autosave(entry)}
       />
