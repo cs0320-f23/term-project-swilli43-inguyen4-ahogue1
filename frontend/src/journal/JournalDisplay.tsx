@@ -1,6 +1,8 @@
 import { Dispatch, SetStateAction, useState } from "react";
 import JournalPrompt from "./JournalPrompt";
 import { JournalInput } from "./JournalInput";
+import "../styles/journal.css";
+
 /* The input gets parsed into an input object so that the data can be easily accessed and displayed */
 export interface EntryObject {
   number: number;
@@ -31,11 +33,7 @@ export default function JournalDisplay(props: JournalProps) {
 
   return (
     <div className="journal" aria-label="journal">
-      <div className="Journal-header">
-        <h1 aria-label="title">Journal Buddy</h1>
-      </div>
       <JournalPrompt/>
-      <hr></hr>
       <JournalInput
         history={history}
         // setHistory={setHistory}

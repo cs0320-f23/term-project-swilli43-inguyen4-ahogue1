@@ -10,7 +10,7 @@ export default function SuggestionsDisplay(props: SuggestionsProps) {
   
   return (
     <div className="SuggestionsDisplay" aria-label="suggestions display">
-      <p>Suggestions</p>
+      <h2>Suggestions</h2>
     </div>
   );
 }

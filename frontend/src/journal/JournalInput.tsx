@@ -4,7 +4,7 @@
 import { Dispatch, SetStateAction, useState, useEffect } from "react";
 import { ControlledInput } from "../journal/ControlledInput";
 import { EntryObject } from "./JournalDisplay";
-import "../styles/App.css";
+import "../styles/journal.css";
 
 interface JournalInputProps {
   history: EntryObject[]; // the map of past entries 
@@ -69,19 +69,19 @@ export function JournalInput(props: JournalInputProps) {
       aria-label="Journal input"
       aria-description="Journal input box"
     >
-      <fieldset>
-        <legend>Enter response here...</legend>
-        <ControlledInput
-          value={entry}
-          setValue={setEntry}
-          ariaLabel={"Journal entry"}
-          onKeyPress={(e) => handleKeyPress(e, entry)}
-          // onInput={(e) => autosave(entry)}
-        />
-      </fieldset>
+      <ControlledInput
+        value={entry}
+        setValue={setEntry}
+        ariaLabel={"Journal entry"}
+        onKeyPress={(e) => handleKeyPress(e, entry)}
+        // onInput={(e) => autosave(entry)}
+      />
+     
       <button onClick={() => handlePrev()}>prev</button>
       <button onClick={() => handleNext()}>next</button>
-      <button onClick={() => handleSubmit(entry)}>submit for suggestions</button>
+      <button className="submit-button" onClick={() => handleSubmit(entry)}>
+        submit for suggestions
+      </button>
     </div>
   );
 }

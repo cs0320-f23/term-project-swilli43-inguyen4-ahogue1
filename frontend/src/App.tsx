@@ -9,14 +9,17 @@ function App() {
 
   return (
     <div className="App">
+      <div className="App-header">
+        <h1 aria-label="title">Journal Buddy</h1>
+      </div>
       <div className="Journal">
-        <JournalDisplay 
-        setCurrentEntry={setCurrentEntry} 
-        setDisplaySuggestions={setDisplaySuggestions}
+        <JournalDisplay
+          setCurrentEntry={setCurrentEntry}
+          setDisplaySuggestions={setDisplaySuggestions}
         />
-        <SuggestionsDisplay 
-        currentEntry={currentEntry}
-        displaySuggestions={displaySuggestions} 
+        <SuggestionsDisplay
+          currentEntry={currentEntry}
+          displaySuggestions={displaySuggestions}
         />
       </div>
     </div>
