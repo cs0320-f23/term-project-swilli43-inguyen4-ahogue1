@@ -1,4 +1,5 @@
 import { Dispatch, KeyboardEventHandler, SetStateAction } from "react";
+import "../styles/journal.css";
 
 // Remember that parameter names don't necessarily need to overlap;
 // I could use different variable names in the actual function.

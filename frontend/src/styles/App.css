@@ -1,13 +1,19 @@
 .App {
   text-align: center;
   display: grid;
-  grid-template-columns: 35% 65%;
+
 }
 
-.map {
-  display: inline-block;
-  /* width: 65%; */
-  vertical-align: top;
+.App-header {
+  background-color: #83C082;
+  height: 8vh;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+  font-size: calc(2vmin);
+  color: black;
+  font-family: 'IBM Plex Serif', serif;
 }
 
 .command {
@@ -15,27 +21,6 @@
   padding: 3%;
   margin: 2%;
 }
-
-.repl {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: #a2a8d3; 
-    
-}
-
-.repl-history {      
-  height: 77.5vh; 
-  overflow: scroll; 
-  width: 100%; 
-}
-
-.repl-command-box {
-  height: 9vh;
-  font-size: large;
-  background-color: #a2a8d3;
-} 
 
 .box {
   position: absolute;

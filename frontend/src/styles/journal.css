@@ -1,0 +1,46 @@
+.journal {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+    
+}
+
+.repl-history {      
+  height: 77.5vh; 
+  overflow: scroll; 
+  width: 100%; 
+}
+
+.journal-input {
+  height: 20%;
+  
+} 
+
+.submit-button {
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #BCE8BB;
+  color: #25252C;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+.submit-button:hover {
+  border-color: #646cff;
+  background-color: #e3ffe2;
+  color: #25252C;
+}
+
+.journal-command-box {
+  height: calc(4vmin);
+  width: 60%;
+  color: #939393;
+  margin: auto;
+  display: block;
+  font-size: 14px;
+  
+}
