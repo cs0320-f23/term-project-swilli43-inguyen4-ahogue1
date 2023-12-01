@@ -53,7 +53,7 @@ export default function LoginPage() {
         <img src={googleLogo} alt="google logo" className="google-logo"/>
     </a>
     <p>
-      Don't have an account? 
+      Don't have an account?{' '}
       <a href="https://www.gmail.com" className="register-link" aria-label="register link">
         Register
       </a> 
