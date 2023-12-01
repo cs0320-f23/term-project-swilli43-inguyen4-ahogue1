@@ -15,9 +15,9 @@ function App() {
         <h1 aria-label="title">Journal Buddy</h1>
       </div>
       {/* <LoginPage /> */}
-      <RegisterPage />
+      {/* <RegisterPage /> */}
 
-      {/* <div className="Journal">
+      <div className="Journal">
         <JournalDisplay
           setCurrentEntry={setCurrentEntry}
           setDisplaySuggestions={setDisplaySuggestions}
@@ -26,7 +26,7 @@ function App() {
           currentEntry={currentEntry}
           displaySuggestions={displaySuggestions}
         />
-      </div> */}
+      </div>
 
     </div>
   );
