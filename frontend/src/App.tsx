@@ -13,18 +13,18 @@ function App() {
       <div className="App-header">
         <h1 aria-label="title">Journal Buddy</h1>
       </div>
-      <LoginPage />
+      {/* <LoginPage /> */}
 
-      {/* <div className="Journal">
+      <div className="Journal">
         <JournalDisplay
           setCurrentEntry={setCurrentEntry}
           setDisplaySuggestions={setDisplaySuggestions}
-        /> */}
-        {/* <SuggestionsDisplay
+        />
+        <SuggestionsDisplay
           currentEntry={currentEntry}
           displaySuggestions={displaySuggestions}
         />
-      </div> */}
+      </div>
 
     </div>
   );
