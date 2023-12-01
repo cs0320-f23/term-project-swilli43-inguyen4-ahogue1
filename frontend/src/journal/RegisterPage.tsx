@@ -3,51 +3,54 @@ import { ControlledInput } from "./ControlledInput";
 import googleLogo from "../assets/google_logo.png";
 
 
-export default function LoginPage() {
+export default function RegisterPage() {
     // gonna want 2 text boxes
+    const [name, setName] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
-    
+  
 
     // TODO: I think I should modify this to take in both the username and password
     const handleKeyPress = (
         event: React.KeyboardEvent<HTMLInputElement>,
-        username: string,
+        name: string,
+        email: string,
         password: string
       ) => {
         if (event.key === "Enter") { 
           console.log("enter pressed");
-          handleSubmit(email, password);
+        //   handleSubmit(text);
         }
       };
+  
+    async function handleSubmit(name: string, email: string, password: string) {
+      console.log("registering " + name);
 
-      async function handleSubmit(email: string, password: string) {
-        console.log("logging in " + email);
-        // validate data
+      // validate data
 
-        // if data is valid, query firebase to log user in
-
-        // if data is invalid, display alert
-        // TODO: what if the data is valid (by my standards), but doesn't exist in firebase?
-        // ^^ what kind of error will firebase throw? TODO: catch that and display that there
-        // is no account with that email info
-
-        // might also need to handle if the username is valid but the password isn't
-      }
-
+      // if data is valid, register new user in firebase
+    }
 
     
 
     return (
     <div className="login-page">
-    
 
+    <ControlledInput
+    value={name}
+    setValue={setName}
+    ariaLabel={"name text box"}
+    placeholder="name"
+    onKeyPress={(e) => handleKeyPress(e, name, email, password)} // TODO: do we want a handle keypress here?
+  
+    />
+    
     <ControlledInput
     value={email}
     setValue={setEmail}
     ariaLabel={"email text box"}
     placeholder="email"
-    onKeyPress={(e) => handleKeyPress(e, email, password)} // TODO: do we want a handle keypress here?
+    onKeyPress={(e) => handleKeyPress(e, name, email, password)} // TODO: do we want a handle keypress here?
     />
 
     <ControlledInput
@@ -55,10 +58,10 @@ export default function LoginPage() {
     setValue={setPassword}
     ariaLabel={"password text box"}
     placeholder="password"
-    onKeyPress={(e) => handleKeyPress(e, email, password)}
+    onKeyPress={(e) => handleKeyPress(e, name, email, password)}
     />
 
-    <p> or sign in with </p>
+    <p> or register with </p>
     {/* wrap the google logo in an anchor element to have the image 
         link to firebase auth. TODO: change href to firebase auth 
         from google.com 
@@ -67,17 +70,12 @@ export default function LoginPage() {
         <img src={googleLogo} alt="google logo" className="google-logo"/>
     </a>
 
-    <button className="login-button" onClick={() => handleSubmit(email, password)}>
-        Log In
-      </button>
-
-    <p>
-      Don't have an account?{' '}
-      <a href="https://www.gmail.com" className="register-link" aria-label="register link">
+    <div> {/* create another div tag so that the button displays below the google logo */}
+    <button className="register-button" onClick={() => handleSubmit(name, email, password)}>
         Register
-      </a> 
-    </p>
-
+      </button>
+    </div>
+    
     </div>
 
   );

@@ -3,6 +3,7 @@ import "./styles/App.css";
 import JournalDisplay from "./journal/JournalDisplay";
 import SuggestionsDisplay from "./SuggestionsDisplay";
 import LoginPage from "./journal/LoginPage";
+import RegisterPage from "./journal/RegisterPage";
 
 function App() {
   const [currentEntry, setCurrentEntry] = useState<string>(""); 
@@ -14,8 +15,9 @@ function App() {
         <h1 aria-label="title">Journal Buddy</h1>
       </div>
       {/* <LoginPage /> */}
+      <RegisterPage />
 
-      <div className="Journal">
+      {/* <div className="Journal">
         <JournalDisplay
           setCurrentEntry={setCurrentEntry}
           setDisplaySuggestions={setDisplaySuggestions}
@@ -24,7 +26,7 @@ function App() {
           currentEntry={currentEntry}
           displaySuggestions={displaySuggestions}
         />
-      </div>
+      </div> */}
 
     </div>
   );
