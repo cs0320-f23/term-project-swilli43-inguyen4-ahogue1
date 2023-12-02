@@ -1,16 +1,17 @@
 .App {
   text-align: center;
   display: grid;
-
 }
 
 .App-header {
-  background-color: #83C082;
-  height: 8vh;
+  background: var(--Main-Green, #83C082);
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 120px;
+  height: 50px;
   display: flex;
-  flex-direction: column;
-  align-items: left;
-  justify-content: center;
+  flex-shrink: 0;
+  align-self: stretch;
   font-size: calc(2vmin);
   color: black;
   font-family: 'IBM Plex Serif', serif;
