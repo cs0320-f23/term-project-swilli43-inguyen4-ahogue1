@@ -1,11 +1,11 @@
 export class EntryInfo {
-  prompt: string;
-  date: string;
+  prompt: string | undefined;
+  date: string | undefined;
   entry: string | undefined;
 
   constructor(
-    prompt: string,
-    date: string,
+    prompt: string | undefined,
+    date: string | undefined,
     entry: string | undefined
   ) {
     this.prompt = prompt;

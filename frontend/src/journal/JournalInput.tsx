@@ -7,6 +7,7 @@ import { EntryObject } from "./JournalDisplay";
 import { JournalFunction } from "./JournalFunction";
 import "../styles/journal.css";
 import { EntryInfo } from "./EntryInfo";
+import JournalPrompt from "./JournalPrompt";
 
 interface JournalInputProps {
   history: EntryObject[]; // the map of past entries 
@@ -21,7 +22,7 @@ export const previousEntry: JournalFunction = (args: Array<string>) => {
     .then((responseObject) => {
       console.log(responseObject);
       if (responseObject.entry !== undefined) {
-        const successCommand = new EntryInfo(responseObject.date, responseObject.entry);
+        const successCommand = new EntryInfo(responseObject.prompt, responseObject.date, responseObject.entry);
         return successCommand;
       } else {
         throw new Error("No journal entry found");
@@ -72,7 +73,6 @@ export function JournalInput(props: JournalInputProps) {
     // TODO: call the backend to get user-specfic past journal entries
     // var prevEntry = 
     // setEntry()
-    
   }
 
   
@@ -89,6 +89,8 @@ export function JournalInput(props: JournalInputProps) {
       aria-label="Journal input"
       aria-description="Journal input box"
     >
+      <JournalPrompt />
+
       <ControlledInput
         value={entry}
         setValue={setEntry}
