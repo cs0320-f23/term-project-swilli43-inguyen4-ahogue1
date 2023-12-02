@@ -35,9 +35,6 @@ export default function LoginPage() {
         // might also need to handle if the username is valid but the password isn't
       }
 
-
-    
-
     return (
     <div className="login-page">
     
