@@ -1,20 +1,13 @@
 .journal {
   display: flex;
   padding: 55px 120px;
-  display: flex;
-  width: 672px;
+  width: 100%;
   flex-direction: column;
   align-items: flex-start;
-  gap: 29px;
+
   flex-shrink: 0;
   align-self: stretch;
     
-}
-
-.repl-history {      
-  height: 77.5vh; 
-  overflow: scroll; 
-  width: 100%; 
 }
 
 .journal-input {
