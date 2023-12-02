@@ -1,6 +1,31 @@
 package edu.brown.cs.student.main.Server.journal;
 import java.util.*;
 
-public record JournalEntry(Date date, String entry) {
-    
+public class JournalEntry {
+  private Date date;
+  private String entry;
+  private String prompt;
+
+  public JournalEntry(Date date, String entry, String prompt) {
+    this.date = date;
+    this.entry = entry;
+    this.prompt = prompt;
+  }
+
+  public void updateEntry(String entry) {
+    this.entry = entry;
+  }
+
+  public String getDate() {
+    return this.date.toString();
+  }
+
+  public String getEntry() {
+    return this.entry;
+  }
+
+
+  public String getPrompt() {
+    return this.prompt;
+  }
 }

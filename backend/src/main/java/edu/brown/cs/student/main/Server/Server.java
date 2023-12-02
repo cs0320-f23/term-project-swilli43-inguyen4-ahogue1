@@ -2,11 +2,14 @@ package edu.brown.cs.student.main.Server;
 
 import static spark.Spark.after;
 
-import edu.brown.cs.student.main.Census.ACSAPIDataSource;
-import edu.brown.cs.student.main.Census.CensusDataSource;
-import edu.brown.cs.student.main.Census.DatasourceException;
-import edu.brown.cs.student.main.GeoJSON.GeoData;
-import edu.brown.cs.student.main.GeoJSON.GeoDataSource;
+import edu.brown.cs.student.main.Server.handlers.JournalGetNextHandler;
+import edu.brown.cs.student.main.Server.handlers.JournalGetPrevHandler;
+import edu.brown.cs.student.main.Server.handlers.JournalPromptGeneratorHandler;
+import edu.brown.cs.student.main.Server.handlers.JournalUpdateEntryHandler;
+import edu.brown.cs.student.main.Server.journal.JournalDataSource;
+import edu.brown.cs.student.main.Server.journal.JournalHistory;
+import edu.brown.cs.student.main.Server.journal.DatasourceException;
+import edu.brown.cs.student.main.Server.journal.JournalPromptGenerator;
 import java.util.List;
 import spark.Spark;
 
@@ -18,10 +21,10 @@ public class Server {
   private static List<List<String>> csvData;
   private static List<String> header;
   private static boolean containsHeader;
-  private final CensusDataSource state;
+//  private final JournalDataSource state;
 
-  public Server(CensusDataSource toUse) { // constructor
-    state = toUse;
+  public Server() { // constructor
+//    state = toUse;
     int port = 3232;
     Spark.port(port);
     /*
@@ -47,20 +50,12 @@ public class Server {
           response.header("Access-Control-Allow-Methods", "*");
         });
 
-    // Setting up the handler for the GET /loadCSV, /viewCSV, /searchCSV and /broadband endpoints
 
-    GeoDataSource geoData = new GeoData();
-    Spark.get("geodata", new GeoHandler(geoData));
-    Spark.get("geofilter", new GeoFilterHandler(geoData));
-    Spark.get("geocitystate", new GeoCityStateHandler(geoData));
-    Spark.get("geosearch", new GeoSearchAreaByDescriptionHandler(geoData));
-
-    Spark.get("loadCSV", new LoadCSVHandler());
-    Spark.get("viewCSV", new ViewCSVHandler());
-    Spark.get("searchCSV", new SearchCSVHandler());
-    Spark.get(
-        "broadband",
-        new BroadbandHandler(state)); // state is the datasource, allowing us to search the ACSAPI
+    JournalDataSource journalHistory = new JournalHistory();
+    Spark.get("updateEntry", new JournalUpdateEntryHandler(journalHistory));
+    Spark.get("getprev", new JournalGetPrevHandler(journalHistory));
+    Spark.get("getnext", new JournalGetNextHandler(journalHistory));
+    Spark.get("getprompt", new JournalPromptGeneratorHandler(new JournalPromptGenerator()));
 
     Spark.init();
     Spark.awaitInitialization();
@@ -69,7 +64,7 @@ public class Server {
 
   public static void main(String[] args) throws DatasourceException {
 
-    new Server(new ACSAPIDataSource());
+    new Server();
   }
 
   /**
