@@ -17,12 +17,6 @@
   font-family: 'IBM Plex Serif', serif;
 }
 
-.command {
-  border-radius: 5%;
-  padding: 3%;
-  margin: 2%;
-}
-
 .box {
   position: absolute;
   top: 10px; /* Adjust the top position as needed */
