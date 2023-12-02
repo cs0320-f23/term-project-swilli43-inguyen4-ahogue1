@@ -11,6 +11,7 @@ interface ControlledInputProps {
   ariaLabel: string;
   onKeyPress: KeyboardEventHandler<HTMLInputElement>;
   // onInput: React.FormEventHandler<HTMLInputElement>;
+  placeholder: string;
 }
 
 // Input boxes contain state. We want to make sure React is managing that state,
@@ -20,13 +21,14 @@ export function ControlledInput({
   setValue,
   ariaLabel,
   onKeyPress,
+  placeholder
 }: ControlledInputProps) {
   return (
     <input
       type="text"
       className="journal-command-box"
       value={value}
-      placeholder="Enter response here..."
+      placeholder={placeholder}
       onChange={(ev) => setValue(ev.target.value)}
       aria-label={ariaLabel}
       aria-description="Enter journal response"

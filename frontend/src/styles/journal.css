@@ -52,3 +52,18 @@
   padding: 22px 0px 20% 33px;
   
 }
+
+
+/** log in page related css */
+.google-logo {
+  width: 25px;
+  height: auto;
+}
+
+.register-link {
+  color:forestgreen;
+  text-decoration: none;
+  font-weight: bold;
+  
+}
+
