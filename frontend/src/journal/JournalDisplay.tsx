@@ -18,6 +18,7 @@ interface JournalProps {
 /* The main repl component that contains the shared history state and displays the history and input. */
 export default function JournalDisplay(props: JournalProps) {
   const [history, setHistory] = useState<EntryObject[]>([]);
+  const [prompt, setPrompt] = useState<string>(""); // 
 
   document.addEventListener("keydown", (event) => {
     if (event.key === "tab") {
@@ -33,7 +34,7 @@ export default function JournalDisplay(props: JournalProps) {
 
   return (
     <div className="journal" aria-label="journal">
-      <JournalPrompt/>
+      {/* <JournalPrompt/> */}
       <JournalInput
         history={history}
         // setHistory={setHistory}

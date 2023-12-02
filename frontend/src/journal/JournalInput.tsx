@@ -4,13 +4,32 @@
 import { Dispatch, SetStateAction, useState, useEffect } from "react";
 import { ControlledInput } from "../journal/ControlledInput";
 import { EntryObject } from "./JournalDisplay";
+import { JournalFunction } from "./JournalFunction";
 import "../styles/journal.css";
+import { EntryInfo } from "./EntryInfo";
+import JournalPrompt from "./JournalPrompt";
 
 interface JournalInputProps {
   history: EntryObject[]; // the map of past entries 
   setCurrentEntry: Dispatch<SetStateAction<string>>;
   setDisplaySuggestions: Dispatch<SetStateAction<boolean>>; // the 3 suggestions shown
 }
+
+export const previousEntry: JournalFunction = (args: Array<string>) => {
+  // TODO: FIX URL for backend
+  return fetch("http://localhost:1400/")
+    .then((response) => response.json())
+    .then((responseObject) => {
+      console.log(responseObject);
+      if (responseObject.entry !== undefined) {
+        const successCommand = new EntryInfo(responseObject.prompt, responseObject.date, responseObject.entry);
+        return successCommand;
+      } else {
+        throw new Error("No journal entry found");
+      }
+    });
+};
+
 
 /* This displays the text box and associated buttons and ... ? */
 export function JournalInput(props: JournalInputProps) {
@@ -54,8 +73,9 @@ export function JournalInput(props: JournalInputProps) {
     // TODO: call the backend to get user-specfic past journal entries
     // var prevEntry = 
     // setEntry()
-    
   }
+
+  
   
   async function handleNext() {
     props.setDisplaySuggestions(false)
@@ -69,6 +89,8 @@ export function JournalInput(props: JournalInputProps) {
       aria-label="Journal input"
       aria-description="Journal input box"
     >
+      <JournalPrompt />
+
       <ControlledInput
         value={entry}
         setValue={setEntry}
