@@ -16,7 +16,11 @@ function App() {
         <h1 className="header-text" aria-label="title">
           Journal Buddy
         </h1>
-        <a href="" target="_blank" rel="noopener noreferrer">
+        <a
+          href=""
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <img src={profile} alt="profile" className="profile" />
         </a>
       </div>

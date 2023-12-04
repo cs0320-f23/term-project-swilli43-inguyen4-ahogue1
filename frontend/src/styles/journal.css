@@ -50,12 +50,19 @@
 .journal-command-box {
   display: flex;
   height: 40%;
-  padding: 22px 0px 483px 33px;
+  padding: 22px 33px 483px 33px;
+  font-family: IBM Plex Serif;
+  color: #939393;
+  font-size: 18px;
   justify-content: flex-end;
   align-items: center;
   align-self: stretch;
+  white-space: pre-wrap;
+  word-wrap: break-word;
   border-radius: 10px;
   border: 1px solid var(--Main-Green, #83C082);
+  resize: none;
+  
 }
 
 .button-area {

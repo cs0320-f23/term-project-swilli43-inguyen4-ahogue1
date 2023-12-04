@@ -1,4 +1,4 @@
-import { Dispatch, KeyboardEventHandler, SetStateAction } from "react";
+import { Dispatch, KeyboardEventHandler, SetStateAction, useEffect, useRef } from "react";
 import "../styles/journal.css";
 
 // Remember that parameter names don't necessarily need to overlap;
@@ -23,17 +23,35 @@ export function ControlledInput({
   onKeyPress,
   placeholder
 }: ControlledInputProps) {
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  const adjustInputHeight = () => {
+    const textareaElement = textareaRef.current;
+
+    // updates the size of the box as the user types 
+    if (textareaElement) {
+      textareaElement.style.height = "auto";
+      textareaElement.style.height = `${Math.min(textareaElement.scrollHeight, 20)}px`;
+    }
+  };
+
+  useEffect(() => {
+    adjustInputHeight();
+  }, [value]);
+  
   return (
-    <input
-      type="text"
+    <textarea
+      ref={textareaRef}
       className="journal-command-box"
       value={value}
       placeholder={placeholder}
-      onChange={(ev) => setValue(ev.target.value)}
+      onChange={(ev) => { setValue(ev.target.value);
+        adjustInputHeight();
+      }}
       aria-label={ariaLabel}
       aria-description="Enter journal response"
-      onKeyPress={onKeyPress}
+      //onKeyPress={onKeyPress}
       // onInput={onInput}
-    ></input>
+    ></textarea>
   );
 }
