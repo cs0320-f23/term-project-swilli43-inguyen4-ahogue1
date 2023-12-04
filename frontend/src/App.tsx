@@ -4,6 +4,7 @@ import JournalDisplay from "./journal/JournalDisplay";
 import SuggestionsDisplay from "./SuggestionsDisplay";
 import LoginPage from "./journal/LoginPage";
 import RegisterPage from "./journal/RegisterPage";
+import profile from "./assets/profile.png";
 
 function App() {
   const [currentEntry, setCurrentEntry] = useState<string>(""); 
@@ -12,12 +13,17 @@ function App() {
   return (
     <div className="App">
       <div className="App-header">
-        <h1 aria-label="title">Journal Buddy</h1>
+        <h1 className="header-text" aria-label="title">
+          Journal Buddy
+        </h1>
+        <a href="" target="_blank" rel="noopener noreferrer">
+          <img src={profile} alt="profile" className="profile" />
+        </a>
       </div>
       {/* <LoginPage /> */}
       {/* <RegisterPage /> */}
 
-      <div className="Journal">
+      <div className="journal-container">
         <JournalDisplay
           setCurrentEntry={setCurrentEntry}
           setDisplaySuggestions={setDisplaySuggestions}
@@ -27,7 +33,6 @@ function App() {
           displaySuggestions={displaySuggestions}
         />
       </div>
-
     </div>
   );
 }

@@ -11,9 +11,14 @@ export default function JournalPrompt() {
     // }
     
     return (
-    <div className="journal-prompt">
-        <h2>Daily Prompt:</h2>
-        <p>Describe a highlight and challenge from today.</p>
-    </div>
-  );
+      <div className="journal-prompt">
+        <h2 className="prompt-heading">Daily Prompt:</h2>
+        <div className="prompt-area">
+          <p className="prompt-text">
+            Describe a highlight and challenge from today.
+          </p>
+          <p className="date">Nov 30, 2023</p>
+        </div>
+      </div>
+    );
 } 

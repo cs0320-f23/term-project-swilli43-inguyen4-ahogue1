@@ -6,8 +6,11 @@ import { ControlledInput } from "../journal/ControlledInput";
 import { EntryObject } from "./JournalDisplay";
 import { JournalFunction } from "./JournalFunction";
 import "../styles/journal.css";
+import submit from "../assets/submit.png";
 import { EntryInfo } from "./EntryInfo";
 import JournalPrompt from "./JournalPrompt";
+import PrevButton from "./PrevButton";
+import NextButton from "./NextButton";
 
 interface JournalInputProps {
   history: EntryObject[]; // the map of past entries 
@@ -99,12 +102,24 @@ export function JournalInput(props: JournalInputProps) {
         onKeyPress={(e) => handleKeyPress(e, entry)}
         // onInput={(e) => autosave(entry)}
       />
-     
-      <button onClick={() => handlePrev()}>prev</button>
-      <button onClick={() => handleNext()}>next</button>
-      <button className="submit-button" onClick={() => handleSubmit(entry)}>
-        submit for suggestions
-      </button>
+      <div className="button-area">
+        <div className="prev-next-menu">
+          <button className="prev-button" onClick={() => handlePrev()}>
+            <PrevButton />
+            prev
+          </button>
+          <button className="next-button" onClick={() => handleNext()}>
+            <NextButton />
+            next
+          </button>
+        </div>
+        <button className="submit-button" onClick={() => handleSubmit(entry)}>
+          <p className="submit-text">submit for suggestions</p>
+          <a target="_blank" rel="noopener noreferrer">
+            <img src={submit} alt="submit" className="submit-arrows" />
+          </a>
+        </button>
+      </div>
     </div>
   );
 }
