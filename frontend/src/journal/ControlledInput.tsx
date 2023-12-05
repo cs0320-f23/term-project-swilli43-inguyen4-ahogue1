@@ -55,3 +55,28 @@ export function ControlledInput({
     ></textarea>
   );
 }
+
+export function LoginControlledInput({
+  value,
+  setValue,
+  ariaLabel,
+  onKeyPress,
+  placeholder,
+}: ControlledInputProps) {
+
+  return (
+    <input
+      className="login-command-box"
+      value={value}
+      placeholder={placeholder}
+      onChange={(ev) => {
+        setValue(ev.target.value);
+      }}
+      aria-label={ariaLabel}
+      aria-description="Enter email and password"
+      //onKeyPress={onKeyPress}
+      // onInput={onInput}
+    ></input>
+  );
+}
+

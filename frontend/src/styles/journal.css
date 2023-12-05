@@ -129,18 +129,3 @@
   background-color: #e3ffe2;
   color: #25252C;
 }
-
-
-/** log in page related css */
-.google-logo {
-  width: 25px;
-  height: auto;
-}
-
-.register-link {
-  color:forestgreen;
-  text-decoration: none;
-  font-weight: bold;
-  
-}
-
