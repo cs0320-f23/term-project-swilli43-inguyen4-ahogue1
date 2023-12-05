@@ -33,7 +33,7 @@ export default function JournalDisplay(props: JournalProps) {
   });
 
   return (
-    <div className="journal" aria-label="journal">
+    <div className="journal-display" aria-label="journal">
       {/* <JournalPrompt/> */}
       <JournalInput
         history={history}
