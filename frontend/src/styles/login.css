@@ -10,11 +10,13 @@
 .login-header {
   flex-shrink: 0;
   color: #101810;
-  text-align: center;
+  text-align: left;
   font-family: IBM Plex Serif;
   font-size: 28px;
+  /* padding: 0px 798px 0px 275px; */
   font-style: normal;
   font-weight: 700;
+  align-items: left;
   line-height: normal;
 }
 
@@ -57,6 +59,12 @@
 
 }
 
+.login-button:hover {
+  border-color: #646cff;
+  background-color: #e3ffe2;
+  color: #25252C;
+}
+
 .or-sign-in {
   flex-direction: column;
   align-items: center;
@@ -88,8 +96,8 @@
 }
 
 .google-logo {
-  width: 48px;
-  height: 51px;
+  width: 42px;
+  height: 45px;
 }
 
 .registering {

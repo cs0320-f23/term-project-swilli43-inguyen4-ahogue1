@@ -10,10 +10,15 @@ function App() {
   const [currentEntry, setCurrentEntry] = useState<string>("");
   const [displaySuggestions, setDisplaySuggestions] = useState<boolean>(false);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false); // Track login state
+  const [isSubmitted, setIsSubmitted] = useState<boolean>(false); // Track submit state
 
   const handleLogin = () => {
     setIsLoggedIn(true);
   };
+
+   const handleSubmit = () => {
+     setIsSubmitted(true);
+   };
 
   const renderPage = () => {
     if (isLoggedIn) {
@@ -22,11 +27,14 @@ function App() {
           <JournalDisplay
             setCurrentEntry={setCurrentEntry}
             setDisplaySuggestions={setDisplaySuggestions}
+            onSubmit={handleSubmit}
           />
-          <SuggestionsDisplay
-            currentEntry={currentEntry}
-            displaySuggestions={displaySuggestions}
-          />
+          {isSubmitted && (
+            <SuggestionsDisplay
+              currentEntry={currentEntry}
+              displaySuggestions={displaySuggestions}
+            />
+          )}
         </div>
       );
     } else {

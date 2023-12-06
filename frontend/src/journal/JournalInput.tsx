@@ -13,9 +13,10 @@ import PrevButton from "./PrevButton";
 import NextButton from "./NextButton";
 
 interface JournalInputProps {
-  history: EntryObject[]; // the map of past entries 
-  setCurrentEntry: Dispatch<SetStateAction<string>>;
-  setDisplaySuggestions: Dispatch<SetStateAction<boolean>>; // the 3 suggestions shown
+  onSubmit: () => void;
+  history: EntryObject[]; // the map of past entries
+  // setCurrentEntry: Dispatch<SetStateAction<string>>;
+  //setDisplaySuggestions: Dispatch<SetStateAction<boolean>>; // the 3 suggestions shown
 }
 
 export const previousEntry: JournalFunction = (args: Array<string>) => {
@@ -39,6 +40,10 @@ export function JournalInput(props: JournalInputProps) {
   // Manages the contents of the input box, object, and csv
   const [entry, setEntry] = useState<string>("");
   
+  const handleClick = () => {
+    console.log("Submit button clicked");
+    props.onSubmit();
+  };
   /**
    * allows user to press enter instead of clicking submit
    * @param event a keyboard press
@@ -50,7 +55,7 @@ export function JournalInput(props: JournalInputProps) {
   ) => {
     if (event.key === "Enter") {
       console.log("enter pressed");
-      handleSubmit(entry);
+      // handleSubmit(entry);
       // scrollHistoryToBottom();
     }
   };
@@ -64,26 +69,26 @@ export function JournalInput(props: JournalInputProps) {
   // This function is triggered when the button is clicked. Triggers the 
   // populating of suggestions. Sets the current journal entry so that 
   // SuggestionsDisplay can access it
-  async function handleSubmit(entry: string) {
-    props.setDisplaySuggestions(true)
-    props.setCurrentEntry(entry)
-  }
+  // async function handleSubmit(entry: string) {
+  //   props.setDisplaySuggestions(true)
+  //   props.setCurrentEntry(entry)
+  // }
 
   // handlePrev triggers call to get previous journal entry and passes it to 
   // ControlledInput to re-populate input box with this previous journal entry
-  async function handlePrev() {
-    props.setDisplaySuggestions(false)
+  // async function handlePrev() {
+  //   props.setDisplaySuggestions(false)
     // TODO: call the backend to get user-specfic past journal entries
     // var prevEntry = 
     // setEntry()
-  }
+  // }
 
   
   
-  async function handleNext() {
-    props.setDisplaySuggestions(false)
+  // async function handleNext() {
+  //   props.setDisplaySuggestions(false)
 
-  }
+  // }
 
   /* returns component to user: the input box, sets logic for submtting a command on submit button */
   return (
@@ -104,16 +109,16 @@ export function JournalInput(props: JournalInputProps) {
       />
       <div className="button-area">
         <div className="prev-next-menu">
-          <button className="prev-button" onClick={() => handlePrev()}>
+          <button className="prev-button" onClick={() => "handlePrev()"}>
             <PrevButton />
             prev
           </button>
-          <button className="next-button" onClick={() => handleNext()}>
+          <button className="next-button" onClick={() => "handleNext()"}>
             <NextButton />
             next
           </button>
         </div>
-        <button className="submit-button" onClick={() => handleSubmit(entry)}>
+        <button className="submit-button" onClick={handleClick}>
           <p className="submit-text">submit for suggestions</p>
           <a target="_blank" rel="noopener noreferrer">
             <img src={submit} alt="submit" className="submit-arrows" />
