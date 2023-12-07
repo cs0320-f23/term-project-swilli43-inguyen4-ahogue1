@@ -43,9 +43,11 @@ export function ControlledInput({
     <textarea
       ref={textareaRef}
       className="journal-command-box"
+      id="journal-command-box"
       value={value}
       placeholder={placeholder}
-      onChange={(ev) => { setValue(ev.target.value);
+      onChange={(ev) => {
+        setValue(ev.target.value);
         adjustInputHeight();
       }}
       aria-label={ariaLabel}

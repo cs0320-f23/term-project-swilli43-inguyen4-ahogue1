@@ -12,6 +12,32 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false); // Track login state
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false); // Track submit state
 
+  document.addEventListener("keydown", (event: KeyboardEvent) => {
+    if (event.code == "ControlRight" || event.code == "ControlLeft") {
+      document.getElementById("journal-command-box")?.focus();
+    } else if (event.code == "AltRight" || event.code == "AltLeft") {
+      document.getElementById("submit-button")?.focus();
+      document.getElementById("login-button")?.focus();
+    } 
+  });
+
+  useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (
+        event.key === "Enter" &&
+        document.activeElement?.id === "submit-button"
+      ) {
+        handleSubmit();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyPress);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyPress);
+    };
+  }, []);
+
   const handleLogin = () => {
     setIsLoggedIn(true);
   };

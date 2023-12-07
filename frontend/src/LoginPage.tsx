@@ -72,6 +72,7 @@ export default function LoginPage({ onLogin }: LoginPageProps) {
 
       <button
         className="login-button"
+        id="login-button"
         onClick={() => handleSubmit(email, password)}
       >
         Login

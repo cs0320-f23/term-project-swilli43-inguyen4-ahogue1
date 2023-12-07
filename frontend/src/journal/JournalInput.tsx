@@ -118,7 +118,11 @@ export function JournalInput(props: JournalInputProps) {
             next
           </button>
         </div>
-        <button className="submit-button" onClick={handleClick}>
+        <button
+          className="submit-button"
+          id="submit-button"
+          onClick={handleClick}
+        >
           <p className="submit-text">submit for suggestions</p>
           <a target="_blank" rel="noopener noreferrer">
             <img src={submit} alt="submit" className="submit-arrows" />
