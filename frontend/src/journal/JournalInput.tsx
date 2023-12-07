@@ -102,7 +102,7 @@ export function JournalInput(props: JournalInputProps) {
       <ControlledInput
         value={entry}
         setValue={setEntry}
-        ariaLabel={"Journal entry"}
+        ariaLabel="journal command box"
         placeholder="Enter response here..."
         onKeyPress={(e) => handleKeyPress(e, entry)}
         // onInput={(e) => autosave(entry)}
@@ -120,6 +120,7 @@ export function JournalInput(props: JournalInputProps) {
         </div>
         <button
           className="submit-button"
+          aria-label="submit button"
           id="submit-button"
           onClick={handleClick}
         >

@@ -16,7 +16,7 @@ export default function SuggestionsDisplay(props: SuggestionsProps) {
       <h2 className="suggestions-title">Suggestions:</h2>
       <div className="suggestions-content">
         <body>
-          <ul className="suggestions-list">
+          <ul className="suggestions-list" aria-label="suggestions list">
             <li>
               <input type="checkbox" id="checkbox1"></input>
               <label htmlFor="checkbox1">suggestion 1</label>
@@ -34,7 +34,7 @@ export default function SuggestionsDisplay(props: SuggestionsProps) {
           </ul>
         </body>
       </div>
-      <div className="disclaimer-message">
+      <div className="disclaimer-message" aria-label="mental health disclaimer">
         <Disclaimers />
       </div>
     </div>

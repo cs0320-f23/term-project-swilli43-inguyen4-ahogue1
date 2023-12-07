@@ -50,7 +50,7 @@ export function ControlledInput({
         setValue(ev.target.value);
         adjustInputHeight();
       }}
-      aria-label={ariaLabel}
+      aria-label="journal command box"
       aria-description="Enter journal response"
       //onKeyPress={onKeyPress}
       // onInput={onInput}
