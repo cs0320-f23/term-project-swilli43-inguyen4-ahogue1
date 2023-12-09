@@ -11,12 +11,8 @@ export default function JournalPrompt() {
   return fetch(link)
     .then((response) => response.json())
     .then((responseObject) => {
-      console.log("response object " + responseObject);
-      console.log("PROMPT: " + responseObject.prompt)
       return responseObject.prompt;
     });
-
-
   }
 
   /* gets the prompt when the web page initializes */
@@ -28,7 +24,6 @@ export default function JournalPrompt() {
     fetchData();
   });
 
-  console.log("prompt is " + prompt)
   return (
     <div className="journal-prompt">
         <h2>Daily Prompt:</h2>
