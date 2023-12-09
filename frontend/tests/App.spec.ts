@@ -28,3 +28,21 @@ test("after I type into the input box, its text changes", async ({ page }) => {
   await expect(page.getByLabel("Command input")).toHaveValue(mock_input);
 });
 
+
+/**
+ * Journal Prompt Tests Asserting Visibility & Presence
+ */
+test("on page load, i see a journal prompt", async ({ page }) => {
+  await page.goto("http://localhost:5173/");
+  await expect (page.getByText("Daily prompt")).toBeVisible();
+  await expect (page.locator('css=.journal-prompt')).toBeVisible();
+  await expect (page.locator('css=.journal-prompt')).toBeDefined();
+
+});
+
+test("on page load, the date is displayed", async ({ page }) => {
+  await page.goto("http://localhost:5173/");
+  await expect (page.locator('css=.date')).toBeVisible();
+  await expect (page.locator('css=.date')).toBeDefined();
+  await expect (page.locator('css=.date')).toBeTruthy();
+});
