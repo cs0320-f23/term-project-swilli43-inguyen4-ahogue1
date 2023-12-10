@@ -10,7 +10,7 @@ interface ControlledInputProps {
   setValue: Dispatch<SetStateAction<string>>;
   ariaLabel: string;
   onKeyPress: KeyboardEventHandler<HTMLInputElement>;
-  // onInput: React.FormEventHandler<HTMLInputElement>;
+  onInput: React.FormEventHandler<HTMLTextAreaElement>;
   placeholder: string;
 }
 
@@ -21,7 +21,8 @@ export function ControlledInput({
   setValue,
   ariaLabel,
   onKeyPress,
-  placeholder
+  placeholder,
+  onInput
 }: ControlledInputProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -53,10 +54,21 @@ export function ControlledInput({
       aria-label="journal command box"
       aria-description="Enter journal response"
       //onKeyPress={onKeyPress}
-      // onInput={onInput}
+      onInput={onInput}
     ></textarea>
   );
 }
+
+interface LoginInputProps {
+  value: string;
+  // This type comes from React+TypeScript. VSCode can suggest these.
+  //   Concretely, this means "a function that sets a state containing a string"
+  setValue: Dispatch<SetStateAction<string>>;
+  ariaLabel: string;
+  onKeyPress: KeyboardEventHandler<HTMLInputElement>;
+  placeholder: string;
+}
+
 
 export function LoginControlledInput({
   value,
@@ -64,7 +76,8 @@ export function LoginControlledInput({
   ariaLabel,
   onKeyPress,
   placeholder,
-}: ControlledInputProps) {
+
+}: LoginInputProps) {
 
   return (
     <input

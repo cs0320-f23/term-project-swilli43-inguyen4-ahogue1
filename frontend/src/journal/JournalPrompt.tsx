@@ -1,33 +1,20 @@
 import { Dispatch, SetStateAction, useState, useEffect } from "react";
 
+interface JournalInputProps {
+  prompt: string;
+  date: string;
+}
 
-export default function JournalPrompt() {
-
-  const [prompt, setPrompt] = useState<String | undefined>("");
-
-  async function fetchPrompt(): Promise<String | undefined> {
-    const link =  "http://localhost:3232/getprompt";
-
-  return fetch(link)
-    .then((response) => response.json())
-    .then((responseObject) => {
-      return responseObject.prompt;
-    });
-  }
-
-  /* gets the prompt when the web page initializes */
-  useEffect(() => {
-    const fetchData = async () => {
-      const prompt = await fetchPrompt();
-      setPrompt(prompt);
-    } 
-    fetchData();
-  });
+export default function JournalPrompt({
+  prompt,
+  date,
+}: JournalInputProps) {
 
   return (
     <div className="journal-prompt">
         <h2>Daily Prompt:</h2>
         <p>{prompt}</p>
+        <p className="date">{date}</p>
     </div>
   );
 } 

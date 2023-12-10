@@ -4,9 +4,7 @@ import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
 import com.squareup.moshi.Types;
 
-import edu.brown.cs.student.main.Server.journal.DatasourceException;
-import edu.brown.cs.student.main.Server.journal.JournalDataSource;
-import edu.brown.cs.student.main.Server.journal.JournalEntry;
+import edu.brown.cs.student.main.Server.journal.*;
 import java.lang.reflect.Type;
 import java.util.Date;
 import java.util.HashMap;
@@ -29,9 +27,11 @@ public class JournalGetNextHandler implements Route {
     JsonAdapter<Map<String, Object>> adapter = moshi.adapter(mapStringObject);
     Map<String, Object> responseMap = new HashMap<>();
 
-    Date date = new Date(); // gets current date
+    String date = new Date().toString(); // gets current date
     System.out.println("date is: " + date.toString());
-    String prompt = request.queryParams("prompt");
+    // String prompt = request.queryParams("prompt");
+    JournalPromptGenerator promptGenerator = new JournalPromptGenerator();
+    String prompt = promptGenerator.getRandomJournalPrompt();
     System.out.println("prompt is: " + prompt);
 
     JournalEntry currentEntry = this.journalHistory.getNext(date, prompt);

@@ -21,7 +21,7 @@ public class JournalHistory implements JournalDataSource{
    * Updates the text body of the current journal entry
    * @param newEntry
    */
-  public void updateEntry(Date date, String newEntry, String newPrompt) {
+  public void updateEntry(String date, String newEntry, String newPrompt) {
     if (this.journalHistory.containsKey(this.currentEntryNumber)) {
       this.journalHistory.get(this.currentEntryNumber).updateEntry(newEntry);
     } else {
@@ -51,7 +51,7 @@ public class JournalHistory implements JournalDataSource{
    * @param date
    * @return
    */
-  public JournalEntry getNext(Date date, String prompt) {
+  public JournalEntry getNext(String date, String prompt) {
     System.out.println("I'm in the get next function in JournalHistory");
     Integer newCurrent = this.currentEntryNumber + 1;
     if (this.journalHistory.containsKey(newCurrent)) {
