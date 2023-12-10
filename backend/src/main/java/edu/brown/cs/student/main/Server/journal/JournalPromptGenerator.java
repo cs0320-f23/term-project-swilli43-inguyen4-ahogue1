@@ -16,12 +16,10 @@ public class JournalPromptGenerator {
 
   private List generatePromptList() {
     List<String> journalPrompts = new ArrayList() {{
-      add("Describe a highlight and challenge from today");
       add("How have you been dealing with stress lately?");
       add("Have you felt inspired by anything recently? If so, what?");
     }};
 
-//    System.out.println(journalPrompts);
     return journalPrompts;
   }
 

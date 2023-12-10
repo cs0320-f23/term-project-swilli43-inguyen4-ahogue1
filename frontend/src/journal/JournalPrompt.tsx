@@ -3,22 +3,31 @@ import { Dispatch, SetStateAction, useState, useEffect } from "react";
 
 export default function JournalPrompt() {
 
-  const [prompt, setPrompt] = useState<string>("");
+  const [prompt, setPrompt] = useState<String | undefined>("");
 
-    // async call to the back end to get prompt
-    // const fetchPrompt = async () => {
-    //     // fill this in
-    // }
-    
-    return (
-      <div className="journal-prompt">
-        <h2 className="prompt-heading">Daily Prompt:</h2>
-        <div className="prompt-area">
-          <p className="prompt-text">
-            Describe a highlight and challenge from today.
-          </p>
-          <p className="date">Nov 30, 2023</p>
-        </div>
-      </div>
-    );
+  async function fetchPrompt(): Promise<String | undefined> {
+    const link =  "http://localhost:3232/getprompt";
+
+  return fetch(link)
+    .then((response) => response.json())
+    .then((responseObject) => {
+      return responseObject.prompt;
+    });
+  }
+
+  /* gets the prompt when the web page initializes */
+  useEffect(() => {
+    const fetchData = async () => {
+      const prompt = await fetchPrompt();
+      setPrompt(prompt);
+    } 
+    fetchData();
+  });
+
+  return (
+    <div className="journal-prompt">
+        <h2>Daily Prompt:</h2>
+        <p>{prompt}</p>
+    </div>
+  );
 } 
