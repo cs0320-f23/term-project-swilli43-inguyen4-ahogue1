@@ -14,7 +14,7 @@ import NextButton from "./NextButton";
 interface JournalInputProps {
   onSubmit: () => void;
   // history: EntryInfo[]; // the map of past entries
-  // setCurrentEntry: Dispatch<SetStateAction<string>>;
+  setCurrentEntry: Dispatch<SetStateAction<string>>;
   //setDisplaySuggestions: Dispatch<SetStateAction<boolean>>; // the 3 suggestions shown
 }
 
@@ -127,6 +127,7 @@ export default function JournalInput(props: JournalInputProps) {
   
   const handleClick = () => {
     console.log("Submit button clicked");
+    props.setCurrentEntry(entry);
     props.onSubmit();
   };
   /**

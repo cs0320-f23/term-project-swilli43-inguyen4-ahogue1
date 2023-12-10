@@ -1,4 +1,4 @@
-// import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import JournalPrompt from "./JournalPrompt";
 import JournalInput from "./JournalInput";
 import "../styles/journal.css";
@@ -13,7 +13,7 @@ import { EntryInfo } from "./EntryInfo";
 
 
 interface JournalProps {
-  // setCurrentEntry: Dispatch<SetStateAction<string>>;
+  setCurrentEntry: Dispatch<SetStateAction<string>>;
   setDisplaySuggestions: (display: boolean) => void;
   onSubmit: () => void;
   // isSubmitted: boolean;
@@ -57,7 +57,7 @@ export default function JournalDisplay(props: JournalProps) {
         // setHistory={setHistory}
         // mode={mode}
         // setMode={setMode}
-        // setCurrentEntry={props.setCurrentEntry}
+        setCurrentEntry={props.setCurrentEntry}
        
       />
     </div>
