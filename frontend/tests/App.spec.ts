@@ -17,6 +17,23 @@ test("after logging in, the elements of the journal display are visible", async 
   await expect(page.getByLabel("journal command box")).toBeVisible();
 });
 
+/**
+ * Journal Prompt Tests Asserting Visibility & Presence
+ */
+test("on page load, i see a journal prompt", async ({ page }) => {
+  await page.goto("http://localhost:5173/");
+  await expect (page.getByText("Daily prompt")).toBeVisible();
+  await expect (page.locator('css=.journal-prompt')).toBeVisible();
+  await expect (page.locator('css=.journal-prompt')).toBeDefined();
+
+});
+
+test("on page load, the date is displayed", async ({ page }) => {
+  await page.goto("http://localhost:5173/");
+  await expect (page.locator('css=.date')).toBeVisible();
+  await expect (page.locator('css=.date')).toBeDefined();
+  await expect (page.locator('css=.date')).toBeTruthy();
+
 test("when the submit button is clicked, the suggestions panel is displayed", async ({
   page,
 }) => {
