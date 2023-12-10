@@ -1,0 +1,82 @@
+.suggestions-display {
+  display: flex;
+  width: 376px;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-shrink: 0;
+  align-self: stretch;
+}
+
+.suggestions-title {
+  font-family: IBM Plex Serif;
+  margin-left: 120px;
+  font-size: 28px;
+}
+
+.suggestions-list {
+  margin-left: 80px;
+  list-style-type: none;
+  display: flex;
+  height: 40%;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-bottom: 60%;
+  gap: 5px;
+  align-self: stretch;
+  font-family: IBM Plex Serif;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 600;
+
+}
+
+.suggestions-list input[type="checkbox"] {
+  display: none;
+  
+}
+
+.suggestions-list label::before {
+    content: '';
+    display: inline-block;
+    margin-right: 20px;
+    width: 20px; /* Adjust the size of the custom checkbox */
+    height: 20px; /* Adjust the size of the custom checkbox */
+    border-radius: 8px;
+    border: 3px solid var(--Main-Green, #83C082);/* Border color of the checkbox */
+    
+}
+
+
+.suggestions-list input[type="checkbox"]:checked + label::before{
+    border-radius: 8px;
+    border: 3px solid var(--Main-Green, #83C082);
+    background: var(--light-green, #BCE8BB);
+    font-weight: bold;
+}
+
+.suggestions-list li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.suggestions-list label {
+  display: flex; /* Use flex container for alignment */
+  align-items: center; /* Align items vertically in the flex container */
+}
+
+
+.disclaimer-message {
+  align-self: stretch;
+  margin-right: 120px;
+  margin-left: 120px;
+  width: 376px;
+  color: #939393;
+  font-family: IBM Plex Serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+}

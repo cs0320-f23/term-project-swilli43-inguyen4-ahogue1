@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import JournalPrompt from "./JournalPrompt";
 import { JournalInput } from "./JournalInput";
 import "../styles/journal.css";
@@ -12,13 +12,24 @@ export interface EntryObject {
 
 interface JournalProps {
   setCurrentEntry: Dispatch<SetStateAction<string>>;
-  setDisplaySuggestions: Dispatch<SetStateAction<boolean>>;
+  setDisplaySuggestions: (display: boolean) => void;
+  onSubmit: () => void;
+  // isSubmitted: boolean;
 }
+
 
 /* The main repl component that contains the shared history state and displays the history and input. */
 export default function JournalDisplay(props: JournalProps) {
   const [history, setHistory] = useState<EntryObject[]>([]);
   const [prompt, setPrompt] = useState<string>(""); // 
+  
+
+  // useEffect(() => {
+  //   if (props.isSubmitted) {
+  //     // Do something when isSubmitted changes (e.g., display suggestions)
+  //     props.setDisplaySuggestions(true);
+  //   }
+  // }, [props.isSubmitted]);
 
   document.addEventListener("keydown", (event) => {
     if (event.key === "tab") {
@@ -33,15 +44,19 @@ export default function JournalDisplay(props: JournalProps) {
   });
 
   return (
-    <div className="journal" aria-label="journal">
+    <div className="journal-display" aria-label="journal">
       {/* <JournalPrompt/> */}
       <JournalInput
+        onSubmit={() => {
+          props.setDisplaySuggestions(true);
+          props.onSubmit();
+        }}
         history={history}
         // setHistory={setHistory}
         // mode={mode}
         // setMode={setMode}
-        setCurrentEntry={props.setCurrentEntry}
-        setDisplaySuggestions={props.setDisplaySuggestions}
+        // setCurrentEntry={props.setCurrentEntry}
+       
       />
     </div>
   );
