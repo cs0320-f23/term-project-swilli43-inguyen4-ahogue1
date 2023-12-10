@@ -2,7 +2,7 @@
 
 .App-header {
   background-color: #83C082;
-  height: 100px;
+  height: 75px;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -30,6 +30,6 @@
 
 .journal-container {
   display: flex;
-  padding: 42px 120px;
+  padding: 30px 120px;
   flex-shrink: 0;
 }
