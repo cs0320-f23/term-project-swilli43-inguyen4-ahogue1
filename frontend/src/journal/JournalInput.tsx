@@ -73,7 +73,9 @@ export default function JournalInput(props: JournalInputProps) {
         displayPopup("Error loading prompt; please refresh page");
       }
       } catch (error) {
-        displayPopup("Error fetching data from the backend");
+        displayPopup(
+          "Error: Failed request to the backend server. Please ensure that the backend is running on the expected port (3232)."
+        );
         console.error("Error fetching data:", error);
       
       }

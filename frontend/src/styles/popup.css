@@ -14,7 +14,8 @@
 
 .popup-content {
   background: white;
-  padding: 20px;
+  width: 35%;
+  padding: 18px;
   border-radius: 10px;
   text-align: center;
 }
