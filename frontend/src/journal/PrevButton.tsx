@@ -4,8 +4,8 @@ const PrevButton = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="28"
-      height="47"
+      width="25"
+      height="40"
       viewBox="0 0 28 47"
       fill="none"
     >
