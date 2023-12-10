@@ -6,10 +6,13 @@ import edu.brown.cs.student.main.Server.handlers.JournalGetNextHandler;
 import edu.brown.cs.student.main.Server.handlers.JournalGetPrevHandler;
 import edu.brown.cs.student.main.Server.handlers.JournalPromptGeneratorHandler;
 import edu.brown.cs.student.main.Server.handlers.JournalUpdateEntryHandler;
+import edu.brown.cs.student.main.Server.handlers.GetDateHandler;
+
 import edu.brown.cs.student.main.Server.journal.JournalDataSource;
 import edu.brown.cs.student.main.Server.journal.JournalHistory;
 import edu.brown.cs.student.main.Server.journal.DatasourceException;
 import edu.brown.cs.student.main.Server.journal.JournalPromptGenerator;
+
 import java.util.List;
 import spark.Spark;
 
@@ -56,6 +59,7 @@ public class Server {
     Spark.get("getprev", new JournalGetPrevHandler(journalHistory));
     Spark.get("getnext", new JournalGetNextHandler(journalHistory));
     Spark.get("getprompt", new JournalPromptGeneratorHandler(new JournalPromptGenerator()));
+    Spark.get("getdate", new GetDateHandler());
 
     Spark.init();
     Spark.awaitInitialization();

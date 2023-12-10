@@ -1,17 +1,19 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+// import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import JournalPrompt from "./JournalPrompt";
-import { JournalInput } from "./JournalInput";
+import JournalInput from "./JournalInput";
 import "../styles/journal.css";
+import { EntryInfo } from "./EntryInfo";
 
 /* The input gets parsed into an input object so that the data can be easily accessed and displayed */
-export interface EntryObject {
-  number: number;
-  date: string;
-  entry: string;
-}
+// export interface EntryObject {
+//   number: number;
+//   date: string;
+//   entry: string;
+// }
+
 
 interface JournalProps {
-  setCurrentEntry: Dispatch<SetStateAction<string>>;
+  // setCurrentEntry: Dispatch<SetStateAction<string>>;
   setDisplaySuggestions: (display: boolean) => void;
   onSubmit: () => void;
   // isSubmitted: boolean;
@@ -20,8 +22,8 @@ interface JournalProps {
 
 /* The main repl component that contains the shared history state and displays the history and input. */
 export default function JournalDisplay(props: JournalProps) {
-  const [history, setHistory] = useState<EntryObject[]>([]);
-  const [prompt, setPrompt] = useState<string>(""); // 
+  // const [history, setHistory] = useState<EntryInfo[]>([]);
+  // const [prompt, setPrompt] = useState<string>(""); // 
   
 
   // useEffect(() => {
@@ -51,7 +53,7 @@ export default function JournalDisplay(props: JournalProps) {
           props.setDisplaySuggestions(true);
           props.onSubmit();
         }}
-        history={history}
+        // history={history}
         // setHistory={setHistory}
         // mode={mode}
         // setMode={setMode}
