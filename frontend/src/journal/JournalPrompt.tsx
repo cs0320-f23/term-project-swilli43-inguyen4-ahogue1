@@ -12,9 +12,11 @@ export default function JournalPrompt({
 
   return (
     <div className="journal-prompt">
-        <h2>Daily Prompt:</h2>
-        <p>{prompt}</p>
+      <h2 className="prompt-heading">Daily Prompt:</h2>
+      <div className="prompt-area">
+        <p className="prompt-text">{prompt}</p>
         <p className="date">{date}</p>
+      </div>
     </div>
   );
 } 
