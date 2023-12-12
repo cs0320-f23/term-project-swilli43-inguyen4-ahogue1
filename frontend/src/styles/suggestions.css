@@ -52,7 +52,6 @@
     border-radius: 8px;
     border: 3px solid var(--Main-Green, #83C082);
     background: var(--light-green, #BCE8BB);
-    font-weight: bold;
 }
 
 .suggestions-list li {
@@ -61,11 +60,22 @@
   margin-bottom: 8px;
 }
 
-.suggestions-list label {
-  display: flex; /* Use flex container for alignment */
-  align-items: center; /* Align items vertically in the flex container */
+.suggestions-list input[type="checkbox"]:checked + label {
+  font-weight: bold; 
 }
 
+.suggestions-list label {
+  display: flex;
+  align-items: center;
+  font-family: IBM Plex Serif;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: var(--normal-font-weight, normal);
+}
+
+.suggestions-list span {
+  margin-left: 20px;
+}
 
 .disclaimer-message {
   align-self: stretch;
