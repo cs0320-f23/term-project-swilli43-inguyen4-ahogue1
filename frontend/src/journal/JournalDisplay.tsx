@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import JournalPrompt from "./JournalPrompt";
 import JournalInput from "./JournalInput";
+import MockJournalInput from "./MockJournalInput";
 import "../styles/journal.css";
-import { EntryInfo } from "./EntryInfo";
+
 
 /* The input gets parsed into an input object so that the data can be easily accessed and displayed */
 // export interface EntryObject {
@@ -48,7 +48,7 @@ export default function JournalDisplay(props: JournalProps) {
   return (
     <div className="journal-display" aria-label="journal">
       {/* <JournalPrompt/> */}
-      <JournalInput
+      <MockJournalInput
         onSubmit={() => {
           props.setDisplaySuggestions(true);
           props.onSubmit();
@@ -58,8 +58,18 @@ export default function JournalDisplay(props: JournalProps) {
         // mode={mode}
         // setMode={setMode}
         setCurrentEntry={props.setCurrentEntry}
-       
       />
+      {/* <JournalInput
+        onSubmit={() => {
+          props.setDisplaySuggestions(true);
+          props.onSubmit();
+        }}
+        // history={history}
+        // setHistory={setHistory}
+        // mode={mode}
+        // setMode={setMode}
+        setCurrentEntry={props.setCurrentEntry}
+      /> */}
     </div>
   );
 }
