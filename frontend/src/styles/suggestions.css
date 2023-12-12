@@ -33,7 +33,6 @@
 
 .suggestions-list input[type="checkbox"] {
   display: none;
-  
 }
 
 .suggestions-list label::before {
@@ -43,10 +42,8 @@
     width: 20px; /* Adjust the size of the custom checkbox */
     height: 20px; /* Adjust the size of the custom checkbox */
     border-radius: 8px;
-    border: 3px solid var(--Main-Green, #83C082);/* Border color of the checkbox */
-    
+    border: 3px solid var(--Main-Green, #83C082);/* Border color of the checkbox */  
 }
-
 
 .suggestions-list input[type="checkbox"]:checked + label::before{
     border-radius: 8px;
@@ -61,7 +58,7 @@
 }
 
 .suggestions-list input[type="checkbox"]:checked + label {
-  font-weight: bold; 
+  font-weight: normal; 
 }
 
 .suggestions-list label {
@@ -70,14 +67,55 @@
   font-family: IBM Plex Serif;
   font-size: 22px;
   font-style: normal;
-  font-weight: var(--normal-font-weight, normal);
+  color:#383838;
+  font-weight: var(--normal-font-weight, bold);
+}
+
+.suggestions-list label:hover {
+  color: #83C082;
 }
 
 .suggestions-list span {
   margin-left: 20px;
 }
 
-.disclaimer-message {
+.disclaimers .hover-text {
+  display: none;
+}
+
+.disclaimers .initial-message {
+  align-self: stretch;
+  margin-right: 120px;
+  margin-left: 120px;
+  margin-bottom: 10%;
+  margin-top: 12.5%;
+  color: #939393;
+  width: 376px;
+  font-family: IBM Plex Serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.disclaimers:hover .initial-message {
+  display: none;
+}
+
+.disclaimers:hover .hover-text {
+  display: block;
+  margin-right: 120px;
+  margin-left: 120px;
+  width: 376px;
+  color: #939393;
+  font-family: IBM Plex Serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+/* .disclaimer-message::before {
+  content: "Original Text";
   align-self: stretch;
   margin-right: 120px;
   margin-left: 120px;
@@ -90,3 +128,18 @@
   line-height: normal;
 
 }
+
+.disclaimer-message:hover::before {
+  content: "hi";
+  align-self: stretch;
+  margin-right: 120px;
+  margin-left: 120px;
+  width: 376px;
+  color: #939393;
+  font-family: IBM Plex Serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+} */
