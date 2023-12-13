@@ -10,6 +10,8 @@ import { EntryInfo } from "./EntryInfo";
 import JournalPrompt from "./JournalPrompt";
 import PrevButton from "./PrevButton";
 import NextButton from "./NextButton";
+import Popup from "./ErrorPopup";
+import "../styles/popup.css";
 
 interface JournalInputProps {
   onSubmit: () => void;
@@ -24,6 +26,19 @@ export default function JournalInput(props: JournalInputProps) {
   const [entry, setEntry] = useState<string>("");
   const [prompt, setPrompt] = useState<string>("");
   const [date, setDate] = useState<string>("");
+
+  const [popupMessage, setPopupMessage] = useState<string | null>(null);
+  const [shouldDisplayPopup, setShouldDisplayPopup] = useState<boolean>(false);
+
+  const displayPopup = (message: string) => {
+    setShouldDisplayPopup(true);
+    setPopupMessage(message);
+  };
+
+  const closePopup = () => {
+    setShouldDisplayPopup(false);
+    setPopupMessage(null);
+  };
 
   /* fetch the prompt when the page is started */
   async function fetchPrompt(): Promise<string | undefined> {
@@ -49,15 +64,23 @@ export default function JournalInput(props: JournalInputProps) {
   /* on page initialization, get & display the prompt and the date */
   useEffect(() => {
     const fetchPromptData = async () => {
+      try {
       const fetchedprompt = await fetchPrompt();
 
       if (typeof(fetchedprompt) === "string") {
         setPrompt(fetchedprompt);
       } else {
-        alert("Error loading prompt; please refesh page");
+        displayPopup("Error loading prompt; please refresh page");
       }
-
+      } catch (error) {
+        displayPopup(
+          "Error: Failed request to the backend server. Please ensure that the backend is running on the expected port (3232)."
+        );
+        console.error("Error fetching data:", error);
+      
+      }
     }
+
     const fetchDateData = async () => {
       const fetcheddate = await fetchDate();
 
@@ -69,17 +92,25 @@ export default function JournalInput(props: JournalInputProps) {
     } 
     fetchDateData();
     fetchPromptData();
-  });
+  }, []);
 
-  function errorDisplay(message: string) {
-    const errorDisplay = document.getElementById('error-display'); 
-    if (errorDisplay) {
-      errorDisplay.innerText = `Error: ${message}`;
-      errorDisplay.style.display = 'block';
-    } else {
-      console.error("Error display message not found.")
-    }
-  }
+  // function displayError(message: string) {
+  //   const errorDisplay = document.getElementById('error-display'); 
+  //   if (errorDisplay) {
+  //     errorDisplay.innerText = `Error: ${message}`;
+  //     errorDisplay.style.display = 'block';
+  //   } else {
+  //     console.error("Error display message not found.")
+  //   }
+  // }
+
+  // function hideError() {
+  //   const errorDisplay = document.getElementById("error-display");
+
+  //   if (errorDisplay) {
+  //     errorDisplay.style.display = "none";
+  //   }
+  // }
   
   const previousEntry: JournalFunction = (args: Array<string>) => {
     const errorDisplay = document.getElementById('error-display');
@@ -95,16 +126,19 @@ export default function JournalInput(props: JournalInputProps) {
             setDate(responseObject.journal_date);
           return successEntry;
         } else {
+          displayPopup(responseObject.error_msg);
           console.log("error thrown: " + responseObject.error_msg);
           throw new Error(responseObject.error_msg);
         }
       }).catch((error) => {
         // Handle the error and display the message on the screen
-        console.error("Error: Failed request to the backend server. Please ensure that the backend is running on the expected port (3232).");
-        if (errorDisplay) {
-          errorDisplay.innerText = `Error: ${error.message}`;
-        }
-        throw new Error("Error: Failed request to the backend server. Please ensure that the backend is running on the expected port (3232).");
+        console.log(
+          "Error: Failed request to the backend server. Please ensure that the backend is running on the expected port (1400)."
+        );
+        displayPopup(
+          "Error: Failed request to the backend server. Please ensure that the backend is running on the expected port (1400)."
+        );
+        throw new Error(error.message);
       });
   };
 
@@ -121,9 +155,6 @@ export default function JournalInput(props: JournalInputProps) {
         return successEntry;
       });
   };
-
-
-
   
   const handleClick = () => {
     console.log("Submit button clicked");
@@ -181,14 +212,10 @@ export default function JournalInput(props: JournalInputProps) {
       aria-label="Journal input"
       aria-description="Journal input box"
     >
-      <JournalPrompt 
-        prompt = { prompt }
-        date = { date }
-      />
+      <JournalPrompt prompt={prompt} date={date} />
 
       <div className="error-display" id="error-display">
-        <p id="error-message">Error: Failed request to the backend server. Please ensure that the backend is running on the expected port (3232).</p>
-        <button>Close</button>
+        {shouldDisplayPopup && <Popup message={popupMessage} onClose={closePopup} />}
       </div>
 
       <ControlledInput
