@@ -36,6 +36,13 @@ public class JournalHistory implements JournalDataSource{
    * @throws DatasourceException
    */
   public JournalEntry getPrev() throws DatasourceException {
+    System.out.println("getPrev handler was triggered and journal history is: \n" + journalHistory.toString());
+    for (int i=0; i<journalHistory.size(); i++) {
+      String prompt = journalHistory.get(i).getPrompt();
+      String date = journalHistory.get(i).getDate();
+      String entry = journalHistory.get(i).getEntry();
+      System.out.println("prompt: \n" + prompt + "\ndate: \n"+ date + "\nentry \n" + entry);
+    }
     Integer newCurrent = this.currentEntryNumber - 1;
     if (newCurrent < 0) {
       throw new DatasourceException("Previous entry does not exist");
@@ -53,6 +60,7 @@ public class JournalHistory implements JournalDataSource{
    */
   public JournalEntry getNext(String date, String prompt) {
     System.out.println("I'm in the get next function in JournalHistory");
+
     Integer newCurrent = this.currentEntryNumber + 1;
     if (this.journalHistory.containsKey(newCurrent)) {
       this.currentEntryNumber = newCurrent;
@@ -60,8 +68,6 @@ public class JournalHistory implements JournalDataSource{
     }
     this.currentEntryNumber = newCurrent;
     this.journalHistory.put(this.currentEntryNumber, new JournalEntry(date, "", prompt));
-    System.out.println("current entry number: " + this.currentEntryNumber);
-    System.out.println(this.journalHistory.get(this.currentEntryNumber));
     return this.journalHistory.get(this.currentEntryNumber);
   }
 

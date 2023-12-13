@@ -48,18 +48,7 @@ export default function JournalDisplay(props: JournalProps) {
   return (
     <div className="journal-display" aria-label="journal">
       {/* <JournalPrompt/> */}
-      <MockJournalInput
-        onSubmit={() => {
-          props.setDisplaySuggestions(true);
-          props.onSubmit();
-        }}
-        // history={history}
-        // setHistory={setHistory}
-        // mode={mode}
-        // setMode={setMode}
-        setCurrentEntry={props.setCurrentEntry}
-      />
-      {/* <JournalInput
+      {/* <MockJournalInput
         onSubmit={() => {
           props.setDisplaySuggestions(true);
           props.onSubmit();
@@ -70,6 +59,17 @@ export default function JournalDisplay(props: JournalProps) {
         // setMode={setMode}
         setCurrentEntry={props.setCurrentEntry}
       /> */}
+      <JournalInput
+        onSubmit={() => {
+          props.setDisplaySuggestions(true);
+          props.onSubmit();
+        }}
+        // history={history}
+        // setHistory={setHistory}
+        // mode={mode}
+        // setMode={setMode}
+        setCurrentEntry={props.setCurrentEntry}
+      />
     </div>
   );
 }
