@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./styles/App.css";
 import JournalDisplay from "./journal/JournalDisplay";
 import SuggestionsDisplay from "./SuggestionsDisplay";
+import Disclaimers from "./Disclaimers";
 import LoginPage from "./LoginPage";
-import RegisterPage from "./RegisterPage";
 import profile from "./assets/profile.png";
 
 function App() {
@@ -55,12 +55,20 @@ function App() {
             setDisplaySuggestions={setDisplaySuggestions}
             onSubmit={handleSubmit}
           />
-          {isSubmitted && (
-            <SuggestionsDisplay
-              currentEntry={currentEntry}
-              displaySuggestions={displaySuggestions}
-            />
-          )}
+          <div className="righthand-column">
+            {isSubmitted && (
+              <SuggestionsDisplay
+                currentEntry={currentEntry}
+                displaySuggestions={displaySuggestions}
+              />
+            )}
+            <div
+              className="disclaimer-message"
+              aria-label="mental health disclaimer"
+            >
+              <Disclaimers />
+            </div>
+          </div>
         </div>
       );
     } else {
