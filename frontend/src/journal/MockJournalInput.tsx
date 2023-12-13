@@ -151,11 +151,6 @@ function mockFetchDate(): string {
         date = { date }
       />
 
-      {/* <div className="error-display" id="error-display">
-        <p id="error-message">Error: Failed request to the backend server. Please ensure that the backend is running on the expected port (3232).</p>
-        <button>Close</button>
-      </div> */}
-
       <ControlledInput
         value={entry}
         setValue={setEntry}
