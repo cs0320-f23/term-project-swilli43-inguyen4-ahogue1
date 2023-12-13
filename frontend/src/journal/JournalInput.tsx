@@ -77,7 +77,6 @@ export default function JournalInput(props: JournalInputProps) {
           "Error: Failed request to the backend server. Please ensure that the backend is running on the expected port (3232)."
         );
         console.error("Error fetching data:", error);
-      
       }
     }
 
@@ -93,6 +92,14 @@ export default function JournalInput(props: JournalInputProps) {
     fetchDateData();
     fetchPromptData();
   }, []);
+
+  useEffect(() => {
+    console.log("use effect was updated becuase prompt date or entry was changed");
+    //
+
+  }, [prompt, date, entry]);
+
+  
 
   // function displayError(message: string) {
   //   const errorDisplay = document.getElementById('error-display'); 
@@ -113,6 +120,8 @@ export default function JournalInput(props: JournalInputProps) {
   // }
   
   const previousEntry: JournalFunction = (args: Array<string>) => {
+    console.log("we are in the previousEntry function")
+    autosave()
     const errorDisplay = document.getElementById('error-display');
     return fetch("http://localhost:3232/getprev")
       .then((response) => response.json())
@@ -122,8 +131,12 @@ export default function JournalInput(props: JournalInputProps) {
           const successEntry = new EntryInfo(responseObject.journal_prompt, 
             responseObject.journal_date, responseObject.journal_entry);
             setPrompt(responseObject.journal_prompt);
+            console.log("prompt was set to: " + prompt)
             setEntry(responseObject.journal_entry);
+            console.log("entry was set to: " + entry)
             setDate(responseObject.journal_date);
+            console.log("date was set to: " + date)
+
           return successEntry;
         } else {
           displayPopup(responseObject.error_msg);
@@ -132,17 +145,16 @@ export default function JournalInput(props: JournalInputProps) {
         }
       }).catch((error) => {
         // Handle the error and display the message on the screen
-        console.log(
-          "Error: Failed request to the backend server. Please ensure that the backend is running on the expected port (1400)."
-        );
         displayPopup(
-          "Error: Failed request to the backend server. Please ensure that the backend is running on the expected port (1400)."
+          "There are no more previous entries!"
         );
         throw new Error(error.message);
       });
   };
 
   const nextEntry: JournalFunction = (args: Array<string>) => {
+    console.log("entering next entry");
+    autosave()
     return fetch("http://localhost:3232/getnext")
       .then((response) => response.json())
       .then((responseObject) => {
@@ -152,12 +164,18 @@ export default function JournalInput(props: JournalInputProps) {
           setPrompt(responseObject.journal_prompt);
           setEntry(responseObject.journal_entry);
           setDate(responseObject.journal_date);
+          
+        console.log("success entry is " + successEntry);
+        console.log("prompt: " + prompt);
+        console.log("entry: " + entry);
+        console.log("date: " + date);
         return successEntry;
       });
   };
   
   const handleClick = () => {
     console.log("Submit button clicked");
+    autosave()
     props.setCurrentEntry(entry);
     props.onSubmit();
   };
@@ -180,8 +198,15 @@ export default function JournalInput(props: JournalInputProps) {
   // saves entry to back end, called when user input changes
   function autosave() {
     // send the entry to the back end
-    // backend.post ... ?
-    fetch("http://localhost:3232/updateEntry?entry=" + {entry} + "&prompt=" + {prompt} + "&date=" + {date})
+    fetch("http://localhost:3232/updateEntry?entry=" + entry + "&prompt=" + prompt + "&date=" + date)
+    .then((response) => response.json())
+    .then((responseObject) => {
+      console.log("printing autosave response object...");
+      console.log("result is: " + responseObject.result);
+      console.log("entry is" + responseObject.new_entry);
+      console.log("date is " + responseObject.new_date);
+      console.log("prompt is " + responseObject.new_prompt);
+    })
     .catch((error) => {
       console.log("autosave error")
     })
@@ -228,11 +253,11 @@ export default function JournalInput(props: JournalInputProps) {
       />
       <div className="button-area">
         <div className="prev-next-menu">
-          <button className="prev-button" onClick={() => previousEntry}>
+          <button className="prev-button" onClick={() => previousEntry([])}>
             <PrevButton />
             prev
           </button>
-          <button className="next-button" onClick={() => nextEntry}>
+          <button className="next-button" onClick={() => nextEntry([])}>
             <NextButton />
             next
           </button>

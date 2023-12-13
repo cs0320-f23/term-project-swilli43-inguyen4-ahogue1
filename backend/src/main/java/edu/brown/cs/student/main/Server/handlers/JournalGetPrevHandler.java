@@ -33,6 +33,9 @@ public class JournalGetPrevHandler implements Route {
       responseMap.put("journal_date", currentEntry.getDate());
       responseMap.put("journal_entry", currentEntry.getEntry());
       responseMap.put("journal_prompt", currentEntry.getPrompt());
+
+      System.out.println("in get prev handler, ");
+      System.out.println("entry is: " + currentEntry.getEntry());
     } catch (DatasourceException e) {
       responseMap.put("result", "error");
       responseMap.put("error_msg", e.getMessage());

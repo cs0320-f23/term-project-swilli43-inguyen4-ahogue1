@@ -41,6 +41,9 @@ public class JournalGetNextHandler implements Route {
     responseMap.put("journal_entry", currentEntry.getEntry());
     responseMap.put("journal_prompt", currentEntry.getPrompt());
 
+    System.out.println("in get next handler, ");
+    System.out.println("entry is: " + currentEntry.getEntry());
+
     return adapter.toJson(responseMap);
   }
 
