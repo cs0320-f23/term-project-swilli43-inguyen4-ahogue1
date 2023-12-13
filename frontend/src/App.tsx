@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./styles/App.css";
 import JournalDisplay from "./journal/JournalDisplay";
 import SuggestionsDisplay from "./SuggestionsDisplay";
+import RandomPlant from "./RandomPlant";
 import Disclaimers from "./Disclaimers";
 import LoginPage from "./LoginPage";
 import profile from "./assets/profile.png";
@@ -46,6 +47,10 @@ function App() {
      setIsSubmitted(true);
    };
 
+   const handleSuggestions = () => {
+     setIsSubmitted(false);
+   };
+
   const renderPage = () => {
     if (isLoggedIn) {
       return (
@@ -54,13 +59,19 @@ function App() {
             setCurrentEntry={setCurrentEntry}
             setDisplaySuggestions={setDisplaySuggestions}
             onSubmit={handleSubmit}
+            onNext={handleSuggestions}
           />
           <div className="righthand-column">
             {isSubmitted && (
-              <SuggestionsDisplay
-                currentEntry={currentEntry}
-                displaySuggestions={displaySuggestions}
-              />
+              <div className="on-submit-click">
+                <SuggestionsDisplay
+                  currentEntry={currentEntry}
+                  displaySuggestions={displaySuggestions}
+                />
+                <div className="plant-image">
+                  <RandomPlant />
+                </div>
+              </div>
             )}
             <div
               className="disclaimer-message"
@@ -82,6 +93,15 @@ function App() {
     }
   };
 
+  // useEffect(() => {
+  //   // Reset isSubmitted to false after SuggestionsDisplay appears
+  //   if (isSubmitted) {
+  //     setDisplaySuggestions(false);
+  //     setIsSubmitted(false);
+  //   }
+  // }, [isSubmitted, setDisplaySuggestions]);
+
+
   return (
     <div className="App">
       <div className="App-header">
@@ -99,5 +119,6 @@ function App() {
     </div>
   );
 }
+
 
 export default App;

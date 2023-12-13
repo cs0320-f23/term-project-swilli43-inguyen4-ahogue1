@@ -16,6 +16,7 @@ interface JournalProps {
   setCurrentEntry: Dispatch<SetStateAction<string>>;
   setDisplaySuggestions: (display: boolean) => void;
   onSubmit: () => void;
+  onNext: () => void;
   // isSubmitted: boolean;
 }
 
@@ -63,6 +64,10 @@ export default function JournalDisplay(props: JournalProps) {
         onSubmit={() => {
           props.setDisplaySuggestions(true);
           props.onSubmit();
+        }}
+        onNext={() => {
+          props.setDisplaySuggestions(false);
+          props.onNext();
         }}
         // history={history}
         // setHistory={setHistory}

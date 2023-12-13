@@ -15,6 +15,7 @@ import "../styles/popup.css";
 
 interface JournalInputProps {
   onSubmit: () => void;
+  onNext: () => void;
   // history: EntryInfo[]; // the map of past entries
   setCurrentEntry: Dispatch<SetStateAction<string>>;
   //setDisplaySuggestions: Dispatch<SetStateAction<boolean>>; // the 3 suggestions shown
@@ -155,6 +156,7 @@ export default function JournalInput(props: JournalInputProps) {
   const nextEntry: JournalFunction = (args: Array<string>) => {
     console.log("entering next entry");
     autosave()
+    props.onNext();
     return fetch("http://localhost:3232/getnext")
       .then((response) => response.json())
       .then((responseObject) => {
