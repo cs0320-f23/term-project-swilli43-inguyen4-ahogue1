@@ -121,6 +121,7 @@ export default function JournalInput(props: JournalInputProps) {
   
   const previousEntry: JournalFunction = (args: Array<string>) => {
     console.log("we are in the previousEntry function")
+    autosave()
     const errorDisplay = document.getElementById('error-display');
     return fetch("http://localhost:3232/getprev")
       .then((response) => response.json())
@@ -153,6 +154,7 @@ export default function JournalInput(props: JournalInputProps) {
 
   const nextEntry: JournalFunction = (args: Array<string>) => {
     console.log("entering next entry");
+    autosave()
     return fetch("http://localhost:3232/getnext")
       .then((response) => response.json())
       .then((responseObject) => {
@@ -173,6 +175,7 @@ export default function JournalInput(props: JournalInputProps) {
   
   const handleClick = () => {
     console.log("Submit button clicked");
+    autosave()
     props.setCurrentEntry(entry);
     props.onSubmit();
   };
@@ -195,9 +198,6 @@ export default function JournalInput(props: JournalInputProps) {
   // saves entry to back end, called when user input changes
   function autosave() {
     // send the entry to the back end
-    // console.log("in autosave, entry is " + {entry});
-    // console.log("date is: " + {date});
-    // console.log("prompt is " + {prompt});
     fetch("http://localhost:3232/updateEntry?entry=" + entry + "&prompt=" + prompt + "&date=" + date)
     .then((response) => response.json())
     .then((responseObject) => {
@@ -210,12 +210,6 @@ export default function JournalInput(props: JournalInputProps) {
     .catch((error) => {
       console.log("autosave error")
     })
-
-    /*
-      .then((response) => response.json())
-      .then((responseObject) => {
-        console.log(responseObject);
-     */
   }
   
   // This function is triggered when the button is clicked. Triggers the 
