@@ -195,7 +195,6 @@ export default function JournalInput(props: JournalInputProps) {
   // saves entry to back end, called when user input changes
   function autosave() {
     // send the entry to the back end
-    // backend.post ... ?
     // console.log("in autosave, entry is " + {entry});
     // console.log("date is: " + {date});
     // console.log("prompt is " + {prompt});
