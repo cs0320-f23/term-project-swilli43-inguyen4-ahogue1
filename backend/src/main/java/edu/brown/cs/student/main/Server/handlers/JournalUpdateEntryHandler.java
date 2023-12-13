@@ -32,6 +32,9 @@ public class JournalUpdateEntryHandler implements Route {
 
     this.journalHistory.updateEntry(date, entry, prompt);
     responseMap.put("result", "success");
+    responseMap.put("new_prompt", prompt);
+    responseMap.put("new_date", date);
+    responseMap.put("new_entry", entry);
 
     return adapter.toJson(responseMap);
   }

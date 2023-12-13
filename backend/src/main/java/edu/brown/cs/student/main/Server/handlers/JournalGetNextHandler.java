@@ -23,9 +23,12 @@ public class JournalGetNextHandler implements Route {
   public Object handle(Request request, Response response) throws Exception {
     System.out.println("I'm in the get next handler");
     Moshi moshi = new Moshi.Builder().build();
-    Type mapStringObject = Types.newParameterizedType(Map.class, String.class, Object.class);
-    JsonAdapter<Map<String, Object>> adapter = moshi.adapter(mapStringObject);
-    Map<String, Object> responseMap = new HashMap<>();
+    Type mapStringObject = Types.newParameterizedType(Map.class, String.class, String.class);
+    JsonAdapter<Map<String, String>> adapter = moshi.adapter(mapStringObject);
+    Map<String, String> responseMap = new HashMap<>();
+//    Type mapStringObject = Types.newParameterizedType(Map.class, String.class, Object.class);
+//    JsonAdapter<Map<String, Object>> adapter = moshi.adapter(mapStringObject);
+//    Map<String, Object> responseMap = new HashMap<>();
 
     String date = new Date().toString(); // gets current date
     System.out.println("date is: " + date.toString());

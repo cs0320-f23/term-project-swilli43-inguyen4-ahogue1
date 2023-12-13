@@ -144,11 +144,8 @@ export default function JournalInput(props: JournalInputProps) {
         }
       }).catch((error) => {
         // Handle the error and display the message on the screen
-        console.log(
-          "Error: Failed request to the backend server. Please ensure that the backend is running on the expected port (1400)."
-        );
         displayPopup(
-          "Error: Failed request to the backend server. Please ensure that the backend is running on the expected port (1400)."
+          "There are no more previous entries!"
         );
         throw new Error(error.message);
       });
@@ -167,9 +164,9 @@ export default function JournalInput(props: JournalInputProps) {
           setDate(responseObject.journal_date);
           
         console.log("success entry is " + successEntry);
-        console.log("prompt: " + responseObject.journal_prompt);
-        console.log("entry: " + responseObject.entry);
-        console.log("date: " + responseObject.date);
+        console.log("prompt: " + prompt);
+        console.log("entry: " + entry);
+        console.log("date: " + date);
         return successEntry;
       });
   };
@@ -199,10 +196,27 @@ export default function JournalInput(props: JournalInputProps) {
   function autosave() {
     // send the entry to the back end
     // backend.post ... ?
-    fetch("http://localhost:3232/updateEntry?entry=" + {entry} + "&prompt=" + {prompt} + "&date=" + {date})
+    // console.log("in autosave, entry is " + {entry});
+    // console.log("date is: " + {date});
+    // console.log("prompt is " + {prompt});
+    fetch("http://localhost:3232/updateEntry?entry=" + entry + "&prompt=" + prompt + "&date=" + date)
+    .then((response) => response.json())
+    .then((responseObject) => {
+      console.log("printing autosave response object...");
+      console.log("result is: " + responseObject.result);
+      console.log("entry is" + responseObject.new_entry);
+      console.log("date is " + responseObject.new_date);
+      console.log("prompt is " + responseObject.new_prompt);
+    })
     .catch((error) => {
       console.log("autosave error")
     })
+
+    /*
+      .then((response) => response.json())
+      .then((responseObject) => {
+        console.log(responseObject);
+     */
   }
   
   // This function is triggered when the button is clicked. Triggers the 
