@@ -23,7 +23,7 @@ public class JournalPromptGenerator {
       add("What's been your biggest struggle of the last month?");
       add("Reflect on the last time you cried.");
       add("What is one thing you are grateful for?");
-      add("Have you been able to prioritize yourself lately? Why or why not?")
+      add("Have you been able to prioritize yourself lately? Why or why not?");
       add("What is your biggest regret?");
       add("Is there anyone in your life you want to reconnect with?");
       add("What are you goals for the next month?");
