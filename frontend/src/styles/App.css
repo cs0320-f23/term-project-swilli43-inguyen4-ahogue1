@@ -33,3 +33,10 @@
   padding: 30px 120px;
   flex-shrink: 0;
 }
+
+.on-submit-click {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}

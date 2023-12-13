@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "./styles/plant.css";
 import plant1 from "./assets/plant1.png";
 import plant2 from "./assets/plant2.png";
 
@@ -20,7 +21,7 @@ const RandomPlant = () => {
   
 return (
     <div>
-      <img src={image} alt="Random Image" />
+      <img className="plant-image" src={image} alt="Random Image" />
     </div>
   );
 };
