@@ -23,9 +23,9 @@ public class JournalGetPrevHandler implements Route {
 
   public Object handle(Request request, Response response) throws Exception {
     Moshi moshi = new Moshi.Builder().build();
-    Type mapStringObject = Types.newParameterizedType(Map.class, String.class, String.class);
-    JsonAdapter<Map<String, String>> adapter = moshi.adapter(mapStringObject);
-    Map<String, String> responseMap = new HashMap<>();
+    Type mapStringObject = Types.newParameterizedType(Map.class, String.class, Object.class);
+    JsonAdapter<Map<String, Object>> adapter = moshi.adapter(mapStringObject);
+    Map<String, Object> responseMap = new HashMap<>();
 
     try {
       JournalEntry currentEntry = this.journalHistory.getPrev();
