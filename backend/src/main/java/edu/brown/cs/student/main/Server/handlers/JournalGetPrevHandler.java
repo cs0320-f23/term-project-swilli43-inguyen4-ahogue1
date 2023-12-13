@@ -37,6 +37,8 @@ public class JournalGetPrevHandler implements Route {
       responseMap.put("result", "error");
       responseMap.put("error_msg", e.getMessage());
     }
+    System.out.println("in get prev handler, ");
+    System.out.println("entry is: " + currentEntry.getEntry());
 
     return adapter.toJson(responseMap);
   }

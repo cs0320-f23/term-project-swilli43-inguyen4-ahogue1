@@ -77,7 +77,6 @@ export default function JournalInput(props: JournalInputProps) {
           "Error: Failed request to the backend server. Please ensure that the backend is running on the expected port (3232)."
         );
         console.error("Error fetching data:", error);
-      
       }
     }
 
@@ -93,6 +92,14 @@ export default function JournalInput(props: JournalInputProps) {
     fetchDateData();
     fetchPromptData();
   }, []);
+
+  useEffect(() => {
+    console.log("use effect was updated becuase prompt date or entry was changed");
+    //
+
+  }, [prompt, date, entry]);
+
+  
 
   // function displayError(message: string) {
   //   const errorDisplay = document.getElementById('error-display'); 
@@ -113,6 +120,7 @@ export default function JournalInput(props: JournalInputProps) {
   // }
   
   const previousEntry: JournalFunction = (args: Array<string>) => {
+    console.log("we are in the previousEntry function")
     const errorDisplay = document.getElementById('error-display');
     return fetch("http://localhost:3232/getprev")
       .then((response) => response.json())
@@ -122,8 +130,12 @@ export default function JournalInput(props: JournalInputProps) {
           const successEntry = new EntryInfo(responseObject.journal_prompt, 
             responseObject.journal_date, responseObject.journal_entry);
             setPrompt(responseObject.journal_prompt);
+            console.log("prompt was set to: " + prompt)
             setEntry(responseObject.journal_entry);
+            console.log("entry was set to: " + entry)
             setDate(responseObject.journal_date);
+            console.log("date was set to: " + date)
+
           return successEntry;
         } else {
           displayPopup(responseObject.error_msg);
@@ -143,6 +155,7 @@ export default function JournalInput(props: JournalInputProps) {
   };
 
   const nextEntry: JournalFunction = (args: Array<string>) => {
+    console.log("entering next entry");
     return fetch("http://localhost:3232/getnext")
       .then((response) => response.json())
       .then((responseObject) => {
@@ -152,6 +165,11 @@ export default function JournalInput(props: JournalInputProps) {
           setPrompt(responseObject.journal_prompt);
           setEntry(responseObject.journal_entry);
           setDate(responseObject.journal_date);
+          
+        console.log("success entry is " + successEntry);
+        console.log("prompt: " + responseObject.journal_prompt);
+        console.log("entry: " + responseObject.entry);
+        console.log("date: " + responseObject.date);
         return successEntry;
       });
   };
@@ -228,11 +246,11 @@ export default function JournalInput(props: JournalInputProps) {
       />
       <div className="button-area">
         <div className="prev-next-menu">
-          <button className="prev-button" onClick={() => previousEntry}>
+          <button className="prev-button" onClick={() => previousEntry([])}>
             <PrevButton />
             prev
           </button>
-          <button className="next-button" onClick={() => nextEntry}>
+          <button className="next-button" onClick={() => nextEntry([])}>
             <NextButton />
             next
           </button>
