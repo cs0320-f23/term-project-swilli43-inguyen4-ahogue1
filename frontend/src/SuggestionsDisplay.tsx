@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import "./styles/suggestions.css";
 import rectangle from "./assets/rectangle.png";
 
@@ -10,6 +10,7 @@ interface SuggestionsProps {
 
 /* The main repl component that contains the shared history state and displays the history and input. */
 export default function SuggestionsDisplay(props: SuggestionsProps) {
+  const [suggestion, setSuggestion] = useState<Array<string>>([]);
 
   document.addEventListener("keydown", (event: KeyboardEvent) => {
     if (
@@ -32,6 +33,29 @@ export default function SuggestionsDisplay(props: SuggestionsProps) {
     }
   });
 
+  useEffect(() => {
+    const fetchSuggestions = async () => {
+      try {
+        const link = "http://localhost:3232/getsuggestions?entry=" + props.currentEntry;
+        const response = await fetch(link);
+        const data = await response.json();
+        setSuggestion(data || []);
+      } catch (error) {
+        console.error("Error fetching suggestions:", error);
+      }
+    };
+    fetchSuggestions();
+  }, [props.currentEntry]);
+
+  // const suggestions = (args: string): Promise<Array<string> | undefined> => {
+  //   const link = "http://localhost:3232/getsuggestions?entry=" + props.currentEntry;
+  //   return fetch(link)
+  //     .then((response) => response.json())
+  //     .then((responseObject) => {
+  //       return responseObject;
+  //     });
+  // };
+
   return (
     <div className="suggestions-display" aria-label="suggestions display">
       <h2 className="suggestions-title">Suggestions:</h2>
@@ -40,17 +64,17 @@ export default function SuggestionsDisplay(props: SuggestionsProps) {
           <ul className="suggestions-list" aria-label="suggestions list">
             <li>
               <input type="checkbox" id="checkbox1"></input>
-              <label htmlFor="checkbox1">suggestion 1</label>
+              <label htmlFor="checkbox1">1: {suggestion[0]}</label>
             </li>
             <hr className="list-division"></hr>
             <li>
               <input type="checkbox" id="checkbox2"></input>
-              <label htmlFor="checkbox2">suggestion 2</label>
+              <label htmlFor="checkbox2">2: {suggestion[1]}</label>
             </li>
             <hr className="list-division"></hr>
             <li>
               <input type="checkbox" id="checkbox3"></input>
-              <label htmlFor="checkbox3">suggestion 3</label>
+              <label htmlFor="checkbox3">3: {suggestion[2]}</label>
             </li>
           </ul>
         </body>
