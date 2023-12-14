@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import "./styles/App.css";
 import JournalDisplay from "./journal/JournalDisplay";
 import SuggestionsDisplay from "./SuggestionsDisplay";
+import RandomPlant from "./RandomPlant";
+import Disclaimers from "./Disclaimers";
 import LoginPage from "./LoginPage";
-import RegisterPage from "./RegisterPage";
 import profile from "./assets/profile.png";
 
 function App() {
@@ -46,6 +47,10 @@ function App() {
      setIsSubmitted(true);
    };
 
+   const handleSuggestions = () => {
+     setIsSubmitted(false);
+   };
+
   const renderPage = () => {
     if (isLoggedIn) {
       return (
@@ -54,13 +59,27 @@ function App() {
             setCurrentEntry={setCurrentEntry}
             setDisplaySuggestions={setDisplaySuggestions}
             onSubmit={handleSubmit}
+            onNext={handleSuggestions}
           />
-          {isSubmitted && (
-            <SuggestionsDisplay
-              currentEntry={currentEntry}
-              displaySuggestions={displaySuggestions}
-            />
-          )}
+          <div className="righthand-column">
+            {isSubmitted && (
+              <div className="on-submit-click">
+                <SuggestionsDisplay
+                  currentEntry={currentEntry}
+                  displaySuggestions={displaySuggestions}
+                />
+                <div className="plant-image">
+                  <RandomPlant />
+                </div>
+              </div>
+            )}
+            <div
+              className="disclaimer-message"
+              aria-label="mental health disclaimer"
+            >
+              <Disclaimers />
+            </div>
+          </div>
         </div>
       );
     } else {
@@ -73,6 +92,15 @@ function App() {
       );
     }
   };
+
+  // useEffect(() => {
+  //   // Reset isSubmitted to false after SuggestionsDisplay appears
+  //   if (isSubmitted) {
+  //     setDisplaySuggestions(false);
+  //     setIsSubmitted(false);
+  //   }
+  // }, [isSubmitted, setDisplaySuggestions]);
+
 
   return (
     <div className="App">
@@ -91,5 +119,6 @@ function App() {
     </div>
   );
 }
+
 
 export default App;

@@ -1,6 +1,5 @@
 import { Dispatch, SetStateAction, useState } from "react";
 import "./styles/suggestions.css";
-import Disclaimers from "./Disclaimers";
 import rectangle from "./assets/rectangle.png";
 
 
@@ -11,6 +10,28 @@ interface SuggestionsProps {
 
 /* The main repl component that contains the shared history state and displays the history and input. */
 export default function SuggestionsDisplay(props: SuggestionsProps) {
+
+  document.addEventListener("keydown", (event: KeyboardEvent) => {
+    if (
+      (event.ctrlKey) && event.shiftKey &&
+      event.code === "Digit1"
+    ) {
+      document.getElementById("checkbox1")?.click();
+    }
+    if (
+      (event.ctrlKey) && event.shiftKey &&
+      event.code === "Digit2"
+    ) {
+      document.getElementById("checkbox2")?.click();
+    }
+    if (
+      (event.ctrlKey) && event.shiftKey &&
+      event.code === "Digit3"
+    ) {
+      document.getElementById("checkbox3")?.click();
+    }
+  });
+
   return (
     <div className="suggestions-display" aria-label="suggestions display">
       <h2 className="suggestions-title">Suggestions:</h2>
@@ -33,9 +54,6 @@ export default function SuggestionsDisplay(props: SuggestionsProps) {
             </li>
           </ul>
         </body>
-      </div>
-      <div className="disclaimer-message" aria-label="mental health disclaimer">
-        <Disclaimers />
       </div>
     </div>
   );

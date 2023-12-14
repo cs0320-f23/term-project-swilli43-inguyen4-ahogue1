@@ -43,6 +43,7 @@
 .date {
   color: #A0A0A0;
   text-align: right;
+  margin-left: 20px;
   font-family: IBM Plex Serif;
   font-size: 18px;  
 }

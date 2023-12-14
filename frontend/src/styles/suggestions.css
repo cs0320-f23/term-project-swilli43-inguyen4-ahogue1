@@ -18,11 +18,10 @@
   margin-left: 80px;
   list-style-type: none;
   display: flex;
-  height: 40%;
+  height: 30%;
   flex-direction: column;
   align-items: flex-start;
-  padding-bottom: 60%;
-  gap: 5px;
+  padding-top: 27%;
   align-self: stretch;
   font-family: IBM Plex Serif;
   font-size: 22px;
@@ -68,7 +67,7 @@
   font-size: 22px;
   font-style: normal;
   color:#383838;
-  font-weight: var(--normal-font-weight, bold);
+  font-weight: bold;
 }
 
 .suggestions-list label:hover {
@@ -79,52 +78,3 @@
   margin-left: 20px;
 }
 
-.disclaimers .hover-text {
-  display: none;
-}
-
-.disclaimers .initial-message {
-  align-self: stretch;
-  margin-right: 120px;
-  margin-left: 120px;
-  margin-bottom: 10%;
-  margin-top: 12.5%;
-  color: #939393;
-  width: 376px;
-  font-family: IBM Plex Serif;
-  font-size: 18px;
-  font-weight: 400;
-  line-height: normal;
-}
-
-.disclaimers:hover .initial-message {
-  display: none;
-}
-
-.disclaimers:hover .hover-text {
-  display: block;
-  margin-right: 120px;
-  margin-left: 120px;
-  width: 376px;
-  color: #939393;
-  font-family: IBM Plex Serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
-
-/* .disclaimer-message::before {
-  content: "Original Text";
-  align-self: stretch;
-  margin-right: 120px;
-  margin-left: 120px;
-  width: 376px;
-  color: #939393;
-  font-family: IBM Plex Serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-
-}
