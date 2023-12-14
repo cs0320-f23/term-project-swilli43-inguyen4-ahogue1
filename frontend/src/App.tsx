@@ -62,7 +62,7 @@ function App() {
             onNext={handleSuggestions}
           />
           <div className="righthand-column">
-            {isSubmitted && (
+            {isSubmitted ? (
               <div className="on-submit-click">
                 <SuggestionsDisplay
                   currentEntry={currentEntry}
@@ -72,7 +72,7 @@ function App() {
                   <RandomPlant />
                 </div>
               </div>
-            )}
+            ) : <div className="empty-panel"></div>} 
             <div
               className="disclaimer-message"
               aria-label="mental health disclaimer"
@@ -114,11 +114,8 @@ function App() {
       </div>
 
       {renderPage()}
-
-      {/* <RegisterPage /> */}
     </div>
   );
 }
-
 
 export default App;

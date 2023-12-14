@@ -7,12 +7,14 @@ import plant4 from "./assets/plant4.png";
 import plant5 from "./assets/plant5.png";
 import plant6 from "./assets/plant6.png";
 import plant7 from "./assets/plant7.png";
+import plant8 from "./assets/plant8.png";
+import plant9 from "./assets/plant9.png";
 
 const RandomPlant = () => {
   const [image, setImage] = useState(plant1);
 
   const getRandomImage = () => {
-    const plantArray = [plant1, plant2, plant3, plant4, plant5, plant6, plant7];
+    const plantArray = [plant1, plant2, plant3, plant4, plant5, plant6, plant7, plant8, plant9];
 
     const randomIndex = Math.floor(Math.random() * plantArray.length);
 
