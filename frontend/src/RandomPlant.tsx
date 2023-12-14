@@ -2,12 +2,17 @@ import React, { useEffect, useState } from "react";
 import "./styles/plant.css";
 import plant1 from "./assets/plant1.png";
 import plant2 from "./assets/plant2.png";
+import plant3 from "./assets/plant3.png";
+import plant4 from "./assets/plant4.png";
+import plant5 from "./assets/plant5.png";
+import plant6 from "./assets/plant6.png";
+import plant7 from "./assets/plant7.png";
 
 const RandomPlant = () => {
   const [image, setImage] = useState(plant1);
 
   const getRandomImage = () => {
-    const plantArray = [plant1, plant2];
+    const plantArray = [plant1, plant2, plant3, plant4, plant5, plant6, plant7];
 
     const randomIndex = Math.floor(Math.random() * plantArray.length);
 
@@ -21,7 +26,7 @@ const RandomPlant = () => {
   
 return (
     <div>
-      <img className="plant-image" src={image} alt="Random Image" />
+      <img className="plant-image" aria-label="random plant image" src={image} alt="Random Plant Image" />
     </div>
   );
 };
