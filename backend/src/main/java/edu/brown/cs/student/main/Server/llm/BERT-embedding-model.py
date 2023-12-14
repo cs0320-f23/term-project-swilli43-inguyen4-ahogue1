@@ -91,7 +91,7 @@ def get_embedding(text: str):
             # Use `sum_vec` to represent `token`.
             token_vecs_sum.append(sum_vec)
 
-        print ('Shape is: %d x %d' % (len(token_vecs_sum), len(token_vecs_sum[0])))
+        # print ('Shape is: %d x %d' % (len(token_vecs_sum), len(token_vecs_sum[0])))
 
         # `hidden_states` has shape [13 x 1 x 22 x 768]
 
@@ -101,10 +101,10 @@ def get_embedding(text: str):
         # Calculate the average of all 22 token vectors.
         sentence_embedding = torch.mean(token_vecs, dim=0)
 
-        print ("Our final sentence embedding vector of shape:", sentence_embedding.size())
+        # print ("Our final sentence embedding vector of shape:", sentence_embedding.size())
 
-        for i, token_str in enumerate(tokenized_text):
-            print (i, token_str)
+        # for i, token_str in enumerate(tokenized_text):
+        #     print (i, token_str)
 
         # print("sentence: " + text)
         # print("whole sentence vector value: " + str(sentence_embedding))
@@ -121,17 +121,35 @@ def calculate_similarity_between_user_and_suggestion(user_embedding, suggestion:
     vector_similarity = 1 - cosine(user_embedding, text_embedding)
     print(f'Vector similarity for user embedding and \"{suggestion}\":  %.2f' % vector_similarity)
 
-def get_user_embedding(text_list: [str]):
+def get_user_embedding1(text_list: [str]):
     new_text = ""
     for text in text_list:
-        new_text += text
+        new_text += text + " "
+    print(new_text)
     user_embedding = get_embedding(new_text)
+    print("user tensor1: " + str(user_embedding))
+    return user_embedding
+
+def get_user_embedding2(text_list: [str]):
+    tensor_list = []
+    
+    for text in text_list:
+        embedding = get_embedding(text)
+        tensor_list.append(embedding)
+    
+    user_tensor = torch.stack(tensor_list, dim=0)
+    user_embedding = torch.mean(user_tensor, dim=0)
     return user_embedding
 
 
 
 # get_embedding("Go outside for a walk.")
 # calculate_similarity("Go for a walk.", "Take a run outside.")
-history = ["Go for a walk", "Take a run outside", "Spend time in nature"]
-user = get_user_embedding(history)
-calculate_similarity_between_user_and_suggestion(user, "Go for a walk.")
+history = ["Go for a walk.", "Take a run outside.", "Spend time in nature."]
+user = get_user_embedding1(history)
+calculate_similarity_between_user_and_suggestion(user, "Call a friend.")
+calculate_similarity_between_user_and_suggestion(user, "Take a walk.")
+
+user = get_user_embedding2(history)
+calculate_similarity_between_user_and_suggestion(user, "Call a friend.")
+calculate_similarity_between_user_and_suggestion(user, "Take a walk.")
