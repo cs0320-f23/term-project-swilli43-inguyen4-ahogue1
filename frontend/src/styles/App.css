@@ -30,7 +30,7 @@
 
 .journal-container {
   display: flex;
-  padding: 30px 120px;
+  padding: 20px 120px 30px 120px;
   flex-shrink: 0;
 }
 
@@ -38,10 +38,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 600px;
   justify-content: space-between;
 }
 
 .empty-panel {
   width: 100px;
-  height: 640px;
+  height: 600px;
 }
