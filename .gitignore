@@ -1,0 +1,6 @@
+# front end
+frontend/node_modules/
+
+# backend (python)
+backend_py/env
+backend_py/src/__pycache__
