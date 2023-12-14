@@ -31,6 +31,15 @@ export default function JournalInput(props: JournalInputProps) {
   const [popupMessage, setPopupMessage] = useState<string | null>(null);
   const [shouldDisplayPopup, setShouldDisplayPopup] = useState<boolean>(false);
 
+  document.addEventListener("keyup", (event: KeyboardEvent) => {
+    if (event.code === "ArrowLeft") {
+      document.getElementById("prev-button")?.focus();
+    } 
+    if (event.code === "ArrowRight") {
+      document.getElementById("next-button")?.focus();
+    } 
+  });
+
   const displayPopup = (message: string) => {
     setShouldDisplayPopup(true);
     setPopupMessage(message);
@@ -123,6 +132,7 @@ export default function JournalInput(props: JournalInputProps) {
   const previousEntry: JournalFunction = (args: Array<string>) => {
     console.log("we are in the previousEntry function")
     autosave()
+    props.onNext();
     const errorDisplay = document.getElementById('error-display');
     return fetch("http://localhost:3232/getprev")
       .then((response) => response.json())
@@ -242,7 +252,9 @@ export default function JournalInput(props: JournalInputProps) {
       <JournalPrompt prompt={prompt} date={date} />
 
       <div className="error-display" id="error-display">
-        {shouldDisplayPopup && <Popup message={popupMessage} onClose={closePopup} />}
+        {shouldDisplayPopup && (
+          <Popup message={popupMessage} onClose={closePopup} />
+        )}
       </div>
 
       <ControlledInput
@@ -255,11 +267,19 @@ export default function JournalInput(props: JournalInputProps) {
       />
       <div className="button-area">
         <div className="prev-next-menu">
-          <button className="prev-button" onClick={() => previousEntry([])}>
+          <button
+            className="prev-button"
+            id="prev-button"
+            onClick={() => previousEntry([])}
+          >
             <PrevButton />
             prev
           </button>
-          <button className="next-button" onClick={() => nextEntry([])}>
+          <button
+            className="next-button"
+            id="next-button"
+            onClick={() => nextEntry([])}
+          >
             <NextButton />
             next
           </button>

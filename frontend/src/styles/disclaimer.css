@@ -3,11 +3,11 @@
 }
 
 .disclaimers .initial-message {
+  /* position: fixed; */
   align-self: stretch;
-  position: absolute;
   margin-right: 120px;
   margin-left: 120px;
-  bottom: -100px;
+  bottom: 10%;
   color: #939393;
   width: 376px;
   font-family: IBM Plex Serif;
@@ -21,11 +21,11 @@
 }
 
 .disclaimers:hover .hover-text {
+  /* position: fixed; */
   display: block;
   margin-right: 120px;
   margin-left: 120px;
-  position: absolute;
-  bottom: -140px;
+  bottom: 0;
   width: 376px;
   color: #939393;
   font-family: IBM Plex Serif;

@@ -40,3 +40,8 @@
   align-items: center;
   justify-content: space-between;
 }
+
+.empty-panel {
+  width: 100px;
+  height: 640px;
+}
