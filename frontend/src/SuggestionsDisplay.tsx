@@ -10,28 +10,26 @@ interface SuggestionsProps {
 
 /* The main repl component that contains the shared history state and displays the history and input. */
 export default function SuggestionsDisplay(props: SuggestionsProps) {
-  const [suggestion, setSuggestion] = useState<Array<string>>([]);
 
   document.addEventListener("keydown", (event: KeyboardEvent) => {
-    if (
-      (event.ctrlKey) && event.shiftKey &&
-      event.code === "Digit1"
-    ) {
+    if (event.ctrlKey && event.shiftKey && event.code === "Digit1") {
       document.getElementById("checkbox1")?.click();
     }
     if (
-      (event.ctrlKey) && event.shiftKey &&
+      event.ctrlKey && event.shiftKey &&
       event.code === "Digit2"
     ) {
       document.getElementById("checkbox2")?.click();
     }
     if (
-      (event.ctrlKey) && event.shiftKey &&
+      event.ctrlKey && event.shiftKey &&
       event.code === "Digit3"
     ) {
       document.getElementById("checkbox3")?.click();
     }
   });
+
+  const [suggestion, setSuggestion] = useState<Array<string>>([]);
 
   useEffect(() => {
     const fetchSuggestions = async () => {
@@ -64,7 +62,9 @@ export default function SuggestionsDisplay(props: SuggestionsProps) {
           <ul className="suggestions-list" aria-label="suggestions list">
             <li>
               <input type="checkbox" id="checkbox1"></input>
-              <label htmlFor="checkbox1">1: {suggestion[0]}</label>
+              <label id="checkbox1" htmlFor="checkbox1">
+                1: {suggestion[0]}
+              </label>
             </li>
             <hr className="list-division"></hr>
             <li>
