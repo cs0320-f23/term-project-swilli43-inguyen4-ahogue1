@@ -1,5 +1,4 @@
-
-// put the submit button here 
+// put the submit button here
 
 import { Dispatch, SetStateAction, useState, useEffect } from "react";
 import { ControlledInput } from "./ControlledInput";
@@ -19,7 +18,7 @@ import {
   mockEntry2,
   mockEntryInfo1,
   mockEntryInfo2,
-  mockBackend
+  mockBackend,
 } from "../../tests/mocks/mockedData";
 
 interface JournalInputProps {
@@ -37,13 +36,13 @@ export default function MockJournalInput(props: JournalInputProps) {
   const [date, setDate] = useState<string>("");
 
   /* fetch the prompt when the page is started */
-function mockFetchPrompt(): string {
+  function mockFetchPrompt(): string {
     return mockPrompt1;
   }
 
-function mockFetchDate(): string {
-  return mockDate;
-}
+  function mockFetchDate(): string {
+    return mockDate;
+  }
 
   /* on page initialization, get & display the prompt and the date */
   useEffect(() => {
@@ -65,34 +64,31 @@ function mockFetchDate(): string {
   });
 
   function errorDisplay(message: string) {
-    const errorDisplay = document.getElementById('error-display'); 
+    const errorDisplay = document.getElementById("error-display");
     if (errorDisplay) {
       errorDisplay.innerText = `Error: ${message}`;
-      errorDisplay.style.display = 'block';
+      errorDisplay.style.display = "block";
     } else {
-      console.error("Error display message not found.")
+      console.error("Error display message not found.");
     }
   }
-  
-  const mockPreviousEntry : any = (args: Array<string>) => {
 
+  const mockPreviousEntry: any = (args: Array<string>) => {
     setPrompt(mockPrompt2); // TODO: how to fix these?
     setEntry(mockEntry);
     setDate(mockDate);
-  
+
     return mockEntryInfo1;
-  }
+  };
 
   const mockNextEntry: any = (args: Array<string>) => {
-
     setPrompt(mockPrompt3); // TODO: how to fix these?
     setEntry(mockEntry2);
     setDate(mockDate);
-  
-    return mockEntryInfo2;
-  }
 
-  
+    return mockEntryInfo2;
+  };
+
   const handleClick = () => {
     console.log("Submit button clicked");
     props.setCurrentEntry(entry);
@@ -120,20 +116,18 @@ function mockFetchDate(): string {
     // or, pass the backend array in as a parameter, run the autosave function,
     // then check if the mocked entry exists in the array
   }
-  
-  // This function is triggered when the button is clicked. Triggers the 
-  // populating of suggestions. Sets the current journal entry so that 
+
+  // This function is triggered when the button is clicked. Triggers the
+  // populating of suggestions. Sets the current journal entry so that
   // SuggestionsDisplay can access it
   // async function handleSubmit(entry: string) {
   //   props.setDisplaySuggestions(true)
   //   props.setCurrentEntry(entry)
   // }
 
-  // handlePrev triggers call to get previous journal entry and passes it to 
+  // handlePrev triggers call to get previous journal entry and passes it to
   // ControlledInput to re-populate input box with this previous journal entry
 
-  
-  
   // async function handleNext() {
   //   props.setDisplaySuggestions(false)
 
@@ -146,10 +140,7 @@ function mockFetchDate(): string {
       aria-label="Journal input"
       aria-description="Journal input box"
     >
-      <JournalPrompt 
-        prompt = { prompt }
-        date = { date }
-      />
+      <JournalPrompt prompt={prompt} date={date} />
 
       <ControlledInput
         value={entry}

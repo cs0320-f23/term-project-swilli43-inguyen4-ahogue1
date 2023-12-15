@@ -1,14 +1,16 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import "./styles/suggestions.css";
-import rectangle from "./assets/rectangle.png";
-
 
 interface SuggestionsProps {
   currentEntry: string;
   displaySuggestions: boolean;
 }
-
-/* The main repl component that contains the shared history state and displays the history and input. */
+/**
+ * This function is called in the App component and contains the suggestions in response to the
+ * users journal entry by fetching from the backend.
+ * @param props - the interface above containing the props for the suggestions
+ * @returns - the HTML div representing the suggestions panel
+ */
 export default function SuggestionsDisplay(props: SuggestionsProps) {
 
   document.addEventListener("keydown", (event: KeyboardEvent) => {
@@ -29,15 +31,16 @@ export default function SuggestionsDisplay(props: SuggestionsProps) {
     }
   });
 
-  const [suggestion, setSuggestion] = useState<Array<string>>([]);
+  const [suggestions, setSuggestions] = useState<Array<string>>([]);
 
   useEffect(() => {
     const fetchSuggestions = async () => {
       try {
+        console.log("suggestions")
         const link = "http://localhost:3232/getsuggestions?entry=" + props.currentEntry;
         const response = await fetch(link);
         const data = await response.json();
-        setSuggestion(data || []);
+        setSuggestions(data.suggestions || []);
       } catch (error) {
         console.error("Error fetching suggestions:", error);
       }
@@ -45,14 +48,6 @@ export default function SuggestionsDisplay(props: SuggestionsProps) {
     fetchSuggestions();
   }, [props.currentEntry]);
 
-  // const suggestions = (args: string): Promise<Array<string> | undefined> => {
-  //   const link = "http://localhost:3232/getsuggestions?entry=" + props.currentEntry;
-  //   return fetch(link)
-  //     .then((response) => response.json())
-  //     .then((responseObject) => {
-  //       return responseObject;
-  //     });
-  // };
 
   return (
     <div className="suggestions-display" aria-label="suggestions display">
@@ -61,20 +56,34 @@ export default function SuggestionsDisplay(props: SuggestionsProps) {
         <body>
           <ul className="suggestions-list" aria-label="suggestions list">
             <li>
-              <input type="checkbox" id="checkbox1"></input>
-              <label id="checkbox1" htmlFor="checkbox1">
-                1: {suggestion[0]}
+              <input
+                type="checkbox"
+                id="checkbox1"
+                aria-label="suggestion checkbox 1"
+              ></input>
+              <label
+                id="checkbox1"
+                htmlFor="checkbox1"
+                aria-label="suggestion 1"
+              >
+                {suggestions[0]}
               </label>
             </li>
-            <hr className="list-division"></hr>
             <li>
-              <input type="checkbox" id="checkbox2"></input>
-              <label htmlFor="checkbox2">2: {suggestion[1]}</label>
+              <input
+                type="checkbox"
+                id="checkbox2"
+                aria-label="suggestion checkbox 2"
+              ></input>
+              <label htmlFor="checkbox2">{suggestions[1]}</label>
             </li>
-            <hr className="list-division"></hr>
             <li>
-              <input type="checkbox" id="checkbox3"></input>
-              <label htmlFor="checkbox3">3: {suggestion[2]}</label>
+              <input
+                type="checkbox"
+                id="checkbox3"
+                aria-label="suggestion checkbox 3"
+              ></input>
+              <label htmlFor="checkbox3">{suggestions[2]}</label>
             </li>
           </ul>
         </body>

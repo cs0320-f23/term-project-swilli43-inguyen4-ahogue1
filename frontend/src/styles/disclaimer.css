@@ -3,7 +3,6 @@
 }
 
 .disclaimers .initial-message {
-  /* position: fixed; */
   align-self: stretch;
   margin-right: 120px;
   margin-left: 120px;
@@ -21,7 +20,6 @@
 }
 
 .disclaimers:hover .hover-text {
-  /* position: fixed; */
   display: block;
   margin-right: 120px;
   margin-left: 120px;
