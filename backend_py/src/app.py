@@ -36,11 +36,12 @@ def before_request():
 def homepage():
     return f"<p>Homepage: Backend Python Server of Journal Buddy!</p>"
 
+
 """ params: takes in a suggestion (str) that was clicked on
     converts suggestion to a vector and updates the user_vector
     returns: a success message if the entry was successfully obtained
 """
-@app.route("/saveSuggestion") # note: I am not using this endpoint currently
+@app.route("/savesuggestion") # note: I am not using this endpoint currently
 def updateSuggestionHistory():
     suggestionClicked = request.args.get('suggestion')
     # /saveSuggestion?suggestion=go for a walk
@@ -62,7 +63,7 @@ def updateSuggestionHistory():
     compares the difference between each of the 10 suggestions and the user vector
     returns the top 3 suggestions, based on the cosine similarity
 """
-@app.route("/getSuggestionList")
+@app.route("/getsuggestions")
 def generateSuggestionList():
     user_entry = request.args.get('entry')
     print(f"*** user entry is: {user_entry}")

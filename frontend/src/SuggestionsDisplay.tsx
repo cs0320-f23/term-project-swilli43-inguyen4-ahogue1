@@ -11,13 +11,17 @@ interface SuggestionsProps {
 /* The main repl component that contains the shared history state and displays the history and input. */
 export default function SuggestionsDisplay(props: SuggestionsProps) {
   const [suggestion, setSuggestion] = useState<Array<string>>([]);
+  var flaskIPAddress = "http://10.38.47.19:5001/"; // of python server running on flask handling suggestion generation
+  
+
 
   document.addEventListener("keydown", (event: KeyboardEvent) => {
-    if (
+    if ( // if first suggestion is clicked using keyboard input
       (event.ctrlKey) && event.shiftKey &&
       event.code === "Digit1"
     ) {
       document.getElementById("checkbox1")?.click();
+
     }
     if (
       (event.ctrlKey) && event.shiftKey &&
@@ -33,10 +37,11 @@ export default function SuggestionsDisplay(props: SuggestionsProps) {
     }
   });
 
+
   useEffect(() => {
     const fetchSuggestions = async () => {
       try {
-        const link = "http://localhost:3232/getsuggestions?entry=" + props.currentEntry;
+        const link = flaskIPAddress + "getsuggestions?entry=" + props.currentEntry;
         const response = await fetch(link);
         const data = await response.json();
         setSuggestion(data || []);
@@ -56,6 +61,23 @@ export default function SuggestionsDisplay(props: SuggestionsProps) {
   //     });
   // };
 
+  function handleClick(suggestion: string) {
+    // fetch request sending the suggestion to the savesuggestion flask endpoint
+    try {
+      const link = flaskIPAddress + "savesuggestion?suggestion=" + suggestion;
+      const response = await fetch(link);
+      const result = await response.json();
+
+      if (result!="success") {
+        console.log("an error occured when saving the suggestion to the user's history in the backend")
+      }
+
+    } catch (error) {
+      console.error("Error fetching suggestions:", error);
+    }
+
+  }
+
   return (
     <div className="suggestions-display" aria-label="suggestions display">
       <h2 className="suggestions-title">Suggestions:</h2>
@@ -63,17 +85,18 @@ export default function SuggestionsDisplay(props: SuggestionsProps) {
         <body>
           <ul className="suggestions-list" aria-label="suggestions list">
             <li>
-              <input type="checkbox" id="checkbox1"></input>
+              <input type="checkbox" id="checkbox1" onChange={() => handleClick(suggestion[0])}>
+              </input>
               <label htmlFor="checkbox1">1: {suggestion[0]}</label>
             </li>
             <hr className="list-division"></hr>
             <li>
-              <input type="checkbox" id="checkbox2"></input>
+              <input type="checkbox" id="checkbox2" onChange={() => handleClick(suggestion[1])}></input>
               <label htmlFor="checkbox2">2: {suggestion[1]}</label>
             </li>
             <hr className="list-division"></hr>
             <li>
-              <input type="checkbox" id="checkbox3"></input>
+              <input type="checkbox" id="checkbox3" onChange={() => handleClick(suggestion[0])}></input>
               <label htmlFor="checkbox3">3: {suggestion[2]}</label>
             </li>
           </ul>
