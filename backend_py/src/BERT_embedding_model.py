@@ -2,6 +2,7 @@ import torch
 from transformers import BertTokenizer, BertModel
 from scipy.spatial.distance import cosine
 import openai
+import random
 
 # Load pre-trained model tokenizer (vocabulary)
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
@@ -176,8 +177,21 @@ def reformat_LLM_suggestions(raw_suggestions):
 """
 def get_10_predefined_suggestions():
     suggestion_bank = [
-        
-    ]
+        "Practice mindfulness meditation", "Take a nature walk", "Engage in deep breathing exercises", 
+        "Try yoga or tai chi", "Write in a gratitude journal", "Connect with loved ones", "Listen to uplifting music", 
+        "Get a good night's sleep", "Learn a new hobby", "Limit screen time", "Eat a balanced diet", "Exercise regularly", 
+        "Volunteer for a cause you care about", "Practice self-compassion", "Set realistic goals", "Unplug from technology", 
+        "Read a good book", "Take short breaks throughout the day", "Express your creativity through art", 
+        "Practice progressive muscle relaxation", "Attend a support group", "Establish a bedtime routine", "Laugh more - watch a comedy", 
+        "Cultivate a positive mindset", "Spend time in sunlight", "Declutter your living space", "Engage in random acts of kindness",
+        "Reflect on your achievements", "Learn stress management techniques", "Practice digital detox regularly"
+     ]
+    
+    # random_suggestions is a list of 10 suggestions randomly selected from suggestion_bank w/out repetition
+    random_suggestions = random.sample(suggestion_bank, 10)
+
+    return random_suggetions
+    
     pass
 
 """ parses LLM response to 
@@ -199,22 +213,22 @@ def generate_personalized_suggestions(user_entry: str):
         # formatted suggetions list
         else: 
             suggestions = get_10_predefined_suggestions()
-
-
-
-    pass
+            return suggestions
 
 """ Check if the LLM returns a list in the proper format
 """
-def valid_format(suggestion_list): bool
-    if not isInstance(suggestion_list, list):
+def valid_format(LLM_suggestions): bool
+    # if the LLM_suggestions are not a list, format is invalid
+    if not isinstance(LLM_suggestions, list):
         return False
 
-    for item in suggestion_list:
+    # if LLM_suggestions is not a list of strings, format is invalid
+    for item in LLM_suggestions:
         if type(item) is not str:
             return False
     
-    if len(suggestion_list) is not 10:
+    # if LLM_suggestions does not contain 10 suggestions
+    if len(LLM_suggestions) is not 10:
         return False
     
     # if the list is a list of 10 strings, it's format is valid
