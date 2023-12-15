@@ -1,6 +1,9 @@
-import React from "react";
-
-const PrevButton = () => {
+/**
+ * Component containing the styling for the next button. Taken 
+ * from our figma UI design
+ * @returns the button graphic
+ */
+const NextButton = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -20,4 +23,4 @@ const PrevButton = () => {
   );
 };
 
-export default PrevButton;
+export default NextButton;

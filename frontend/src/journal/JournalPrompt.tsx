@@ -1,9 +1,17 @@
-
+/**
+ * These are the props for the JournalInput component
+ */
 interface JournalInputProps {
   prompt: string;
   date: string;
 }
 
+/**
+ * This is a wrapper component for the journal prompt and the date which is fetched from the 
+ * backend in JournalInput
+ * @param param0 - the interface above containing the arguments to JournalInput
+ * @returns an HTML div representing the prompt area on the journal display
+ */
 export default function JournalPrompt({
   prompt,
   date,

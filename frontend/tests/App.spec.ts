@@ -123,6 +123,22 @@ test("the previous button will result in a popup that can be closed", async ({
   await expect(page.getByLabel("notification message overlay")).toBeHidden();
 });
 
+test("when an entry is typed, previous entries are saved after clicking next and then going back to previous", async ({
+  page,
+}) => {
+  await page.goto("http://localhost:5173/");
+  await page.getByLabel("login button").click();
+  await page.getByLabel("journal command box").click();
+  await page.getByLabel("journal command box")
+    .fill("Example journal entry!");
+  await page.getByLabel("submit button").click();
+  await expect(page.getByLabel("next button")).toBeVisible();
+  await page.getByLabel("next button").click();
+  await expect(page.getByLabel("journal command box")).toBeEmpty();
+  await page.getByLabel("previous button").click();
+  await expect(page.getByLabel("journal command box")).toContainText("Example journal entry!");
+});
+
 test("option keyboard shortcut to focus on submit button", async ({ page }) => {
   await page.goto("http://localhost:5173/");
   await page.keyboard.down("Alt");

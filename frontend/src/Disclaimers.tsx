@@ -1,9 +1,10 @@
 import "./styles/disclaimer.css";
 
-// a wrapper component to list disclaimers
-
-// e.g.: data privacy discalimer
-// medical disclaimer & hotline phone #
+/**
+ * This component represents an HTML div for the disclaimer including security 
+ * and data privacy as well as a medical and mental health disclaimer
+ * @returns an HTML div for the disclaimer message about our program
+ */
 export default function disclaimers() {
   return (
     <div className="disclaimers">

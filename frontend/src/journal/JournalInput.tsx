@@ -116,6 +116,10 @@ export default function JournalInput(props: JournalInputProps) {
     //
   }, [prompt, date, entry]);
 
+  /**
+   * Handles clicking to a previous entry by fetching the prompt, date, and entry
+   * from the backend. Displays a notification popup if there are no more previous entries.
+   */
   const previousEntry: JournalFunction = (args: Array<string>) => {
     console.log("we are in the previousEntry function");
     autosave();
@@ -235,10 +239,6 @@ export default function JournalInput(props: JournalInputProps) {
   // handlePrev triggers call to get previous journal entry and passes it to
   // ControlledInput to re-populate input box with this previous journal entry
 
-  // async function handleNext() {
-  //   props.setDisplaySuggestions(false)
-
-  // }
 
   /* returns component to user: the input box, sets logic for submtting a command on submit button */
   return (

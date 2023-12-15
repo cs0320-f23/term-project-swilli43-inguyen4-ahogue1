@@ -3,26 +3,23 @@ import JournalInput from "./JournalInput";
 import MockJournalInput from "./MockJournalInput";
 import "../styles/journal.css";
 
+/**
+ * These are the props for the JournalDisplay component 
+ */
 interface JournalProps {
   setCurrentEntry: Dispatch<SetStateAction<string>>;
   setDisplaySuggestions: (display: boolean) => void;
   onSubmit: () => void;
   onNext: () => void;
-  // isSubmitted: boolean;
 }
 
-
+/**
+ * This component is a wrapper that contains the JournalInput component and allows for 
+ * dependecy injection with MockJournalInput for mocked testing.
+ * @param props - the interface above containing the arguments to the JournalDisplay
+ * @returns - an HTML div representing the journal area, containing the JournalInput component
+ */
 export default function JournalDisplay(props: JournalProps) {
-  // const [history, setHistory] = useState<EntryInfo[]>([]);
-  // const [prompt, setPrompt] = useState<string>(""); // 
-  
-
-  // useEffect(() => {
-  //   if (props.isSubmitted) {
-  //     // Do something when isSubmitted changes (e.g., display suggestions)
-  //     props.setDisplaySuggestions(true);
-  //   }
-  // }, [props.isSubmitted]);
 
   document.addEventListener("keydown", (event) => {
     if (event.key === "tab") {
@@ -38,18 +35,6 @@ export default function JournalDisplay(props: JournalProps) {
 
   return (
     <div className="journal-display" aria-label="journal">
-      {/* <JournalPrompt/> */}
-      {/* <MockJournalInput
-        onSubmit={() => {
-          props.setDisplaySuggestions(true);
-          props.onSubmit();
-        }}
-        // history={history}
-        // setHistory={setHistory}
-        // mode={mode}
-        // setMode={setMode}
-        setCurrentEntry={props.setCurrentEntry}
-      /> */}
       <JournalInput
         onSubmit={() => {
           props.setDisplaySuggestions(true);
@@ -59,10 +44,6 @@ export default function JournalDisplay(props: JournalProps) {
           props.setDisplaySuggestions(false);
           props.onNext();
         }}
-        // history={history}
-        // setHistory={setHistory}
-        // mode={mode}
-        // setMode={setMode}
         setCurrentEntry={props.setCurrentEntry}
       />
     </div>
