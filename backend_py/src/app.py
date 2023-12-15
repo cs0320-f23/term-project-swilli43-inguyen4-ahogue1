@@ -7,7 +7,7 @@ import os
 sys.path.append("./")
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-from . import BERT_embedding_model
+from src import BERT_embedding_model as bert
 
 app = Flask(__name__)
 
@@ -40,10 +40,10 @@ def homepage():
     converts suggestion to a vector and updates the user_vector
     returns: a success message if the entry was successfully obtained
 """
-@app.route("/suggestionClicked") # note: I am not using this endpoint currently
+@app.route("/saveSuggestion") # note: I am not using this endpoint currently
 def updateSuggestionHistory():
-    suggestionClicked = request.args.get('suggestionClicked')
-    # /suggestionClicked=go for a walk
+    suggestionClicked = request.args.get('suggestion')
+    # /saveSuggestion?suggestion=go for a walk
 
     # defensive programming: only return success if the suggestion is valid
     if (suggestionClicked != ""):
@@ -65,6 +65,15 @@ def updateSuggestionHistory():
 @app.route("/getSuggestionList")
 def generateSuggestionList():
     user_entry = request.args.get('entry')
+
+    # TODO: query LLM, get 10 suggestions back
+    # mocked: hard code 10 suggestions
+    # calculate distance between each suggestion & user vector
+    # return top suggestions 3 w/  that are most similar to user
+
+
+    
+
     # user_vector = request.args.get('vector')
     # IPAddress/getSuggestionList?entry='mock user entry'
 
