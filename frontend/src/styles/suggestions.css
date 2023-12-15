@@ -19,7 +19,7 @@
   list-style-type: none;
   display: flex;
   height: 30%;
-  /* gap: 10px; */
+  gap: 15px;
   flex-direction: column;
   align-items: flex-start;
   padding-top: 10%;

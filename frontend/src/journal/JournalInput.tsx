@@ -270,6 +270,7 @@ export default function JournalInput(props: JournalInputProps) {
           <button
             className="prev-button"
             id="prev-button"
+            aria-label="previous button"
             onClick={() => previousEntry([])}
           >
             <PrevButton />
@@ -278,6 +279,7 @@ export default function JournalInput(props: JournalInputProps) {
           <button
             className="next-button"
             id="next-button"
+            aria-label="next button"
             onClick={() => nextEntry([])}
           >
             <NextButton />

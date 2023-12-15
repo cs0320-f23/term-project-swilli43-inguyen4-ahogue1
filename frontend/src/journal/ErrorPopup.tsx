@@ -19,10 +19,10 @@ const Popup = ({ message, onClose }: PopupProps) => {
   }
 
   return (
-    <div className="popup-overlay">
+    <div className="popup-overlay" aria-label="notification message overlay">
       <div className="popup-content">
         <p className="error-message">{message}</p>
-        <button className="close-button" onClick={handleButtonClick}>Close</button>
+        <button className="close-button" aria-label="close button" onClick={handleButtonClick}>Close</button>
       </div>
     </div>
     );
