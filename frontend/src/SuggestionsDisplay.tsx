@@ -61,7 +61,7 @@ export default function SuggestionsDisplay(props: SuggestionsProps) {
   //     });
   // };
 
-  function handleClick(suggestion: string) {
+  async function handleClick(suggestion: string) {
     // fetch request sending the suggestion to the savesuggestion flask endpoint
     try {
       const link = flaskIPAddress + "savesuggestion?suggestion=" + suggestion;
@@ -96,7 +96,7 @@ export default function SuggestionsDisplay(props: SuggestionsProps) {
             </li>
             <hr className="list-division"></hr>
             <li>
-              <input type="checkbox" id="checkbox3" onChange={() => handleClick(suggestion[0])}></input>
+              <input type="checkbox" id="checkbox3" onChange={() => handleClick(suggestion[2])}></input>
               <label htmlFor="checkbox3">3: {suggestion[2]}</label>
             </li>
           </ul>
