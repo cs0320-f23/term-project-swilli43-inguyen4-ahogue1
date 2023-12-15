@@ -5,6 +5,12 @@ interface PopupProps {
   onClose: () => void;
 }
 
+/**
+ * This component represents the popup to be displayed on the screen in the case of an error such as 
+ * if the backend isn't running properly
+ * @param - the Props from the interface above are taken in as an argument 
+ * @returns an HTML div representing an error popup message
+ */
 const Popup = ({ message, onClose }: PopupProps) => {
   const [closed, setClosed] = useState(false);
 

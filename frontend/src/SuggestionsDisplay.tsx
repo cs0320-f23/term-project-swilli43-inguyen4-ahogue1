@@ -5,8 +5,12 @@ interface SuggestionsProps {
   currentEntry: string;
   displaySuggestions: boolean;
 }
-
-/* The main repl component that contains the shared history state and displays the history and input. */
+/**
+ * This function is called in the App component and contains the suggestions in response to the
+ * users journal entry by fetching from the backend.
+ * @param props - the interface above containing the props for the suggestions
+ * @returns - the HTML div representing the suggestions panel
+ */
 export default function SuggestionsDisplay(props: SuggestionsProps) {
 
   document.addEventListener("keydown", (event: KeyboardEvent) => {

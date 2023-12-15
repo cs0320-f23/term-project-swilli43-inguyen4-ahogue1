@@ -7,6 +7,13 @@ import Disclaimers from "./Disclaimers";
 import LoginPage from "./LoginPage";
 import profile from "./assets/profile.png";
 
+/**
+ * This is the highest level component!
+ * Before login, it opens our program to the LoginPage component.
+ * It also contains our JournalDisplay component and our SuggestionsDisplay components,
+ * which is where everything is displayed and the functionality of our program takes place.
+ */
+
 function App() {
   const [currentEntry, setCurrentEntry] = useState<string>("");
   const [displaySuggestions, setDisplaySuggestions] = useState<boolean>(false);
@@ -14,12 +21,13 @@ function App() {
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false); // Track submit state
 
   document.addEventListener("keydown", (event: KeyboardEvent) => {
+    /* These are some keyboard shortcuts! */
     if (event.code == "ControlRight" || event.code == "ControlLeft") {
       document.getElementById("journal-command-box")?.focus();
     } else if (event.code == "AltRight" || event.code == "AltLeft") {
       document.getElementById("submit-button")?.focus();
       document.getElementById("login-button")?.focus();
-    } 
+    }
   });
 
   useEffect(() => {
@@ -43,13 +51,13 @@ function App() {
     setIsLoggedIn(true);
   };
 
-   const handleSubmit = () => {
-     setIsSubmitted(true);
-   };
+  const handleSubmit = () => {
+    setIsSubmitted(true);
+  };
 
-   const handleSuggestions = () => {
-     setIsSubmitted(false);
-   };
+  const handleSuggestions = () => {
+    setIsSubmitted(false);
+  };
 
   const renderPage = () => {
     if (isLoggedIn) {
@@ -72,7 +80,9 @@ function App() {
                   <RandomPlant />
                 </div>
               </div>
-            ) : <div className="empty-panel"></div>} 
+            ) : (
+              <div className="empty-panel"></div>
+            )}
             <div
               className="disclaimer-message"
               aria-label="mental health disclaimer"
@@ -100,7 +110,6 @@ function App() {
   //     setIsSubmitted(false);
   //   }
   // }, [isSubmitted, setDisplaySuggestions]);
-
 
   return (
     <div className="App">

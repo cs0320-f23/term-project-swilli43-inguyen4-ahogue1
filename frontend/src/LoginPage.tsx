@@ -58,10 +58,7 @@ export default function LoginPage({ onLogin }: LoginPageProps) {
       />
 
       <p className="or-sign-in"> or sign in with </p>
-      {/* wrap the google logo in an anchor element to have the image 
-        link to firebase auth. TODO: change href to firebase auth 
-        from google.com 
-    */}
+     
       <a
         href="https://www.google.com"
         target="_blank"

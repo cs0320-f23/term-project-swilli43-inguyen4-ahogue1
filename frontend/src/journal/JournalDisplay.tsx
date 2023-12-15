@@ -3,15 +3,6 @@ import JournalInput from "./JournalInput";
 import MockJournalInput from "./MockJournalInput";
 import "../styles/journal.css";
 
-
-/* The input gets parsed into an input object so that the data can be easily accessed and displayed */
-// export interface EntryObject {
-//   number: number;
-//   date: string;
-//   entry: string;
-// }
-
-
 interface JournalProps {
   setCurrentEntry: Dispatch<SetStateAction<string>>;
   setDisplaySuggestions: (display: boolean) => void;
@@ -21,7 +12,6 @@ interface JournalProps {
 }
 
 
-/* The main repl component that contains the shared history state and displays the history and input. */
 export default function JournalDisplay(props: JournalProps) {
   // const [history, setHistory] = useState<EntryInfo[]>([]);
   // const [prompt, setPrompt] = useState<string>(""); // 

@@ -1,4 +1,3 @@
-import { Dispatch, SetStateAction, useState, useEffect } from "react";
 
 interface JournalInputProps {
   prompt: string;
