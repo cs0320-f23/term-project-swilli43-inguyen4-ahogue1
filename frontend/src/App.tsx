@@ -19,6 +19,7 @@ function App() {
   const [displaySuggestions, setDisplaySuggestions] = useState<boolean>(false);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false); // Track login state
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false); // Track submit state
+  const [mocking, setMocking] = useState<boolean>(false); 
 
   document.addEventListener("keydown", (event: KeyboardEvent) => {
     /* These are some keyboard shortcuts! */
@@ -47,9 +48,15 @@ function App() {
     };
   }, []);
 
+  
+
   const handleLogin = () => {
     setIsLoggedIn(true);
   };
+
+  const switchMockingMode = () => {
+    setMocking(!mocking);
+  }
 
   const handleSubmit = () => {
     setIsSubmitted(true);
@@ -70,8 +77,18 @@ function App() {
             onNext={handleSuggestions}
           />
           <div className="righthand-column">
+            
             {isSubmitted ? (
-              <div className="on-submit-click">
+
+              mocking ? (
+                <div>
+                console.log("entered mocked mode, mocking is " + mocking)
+                <h1>Mocked Suggestion Display</h1>
+                </div>
+
+               ) : (
+                <div className="on-submit-click">
+                  console.log("not in mocking mode, mocking is " + mocking)
                 <SuggestionsDisplay
                   currentEntry={currentEntry}
                   displaySuggestions={displaySuggestions}
@@ -80,6 +97,8 @@ function App() {
                   <RandomPlant />
                 </div>
               </div>
+              )
+            
             ) : (
               <div className="empty-panel"></div>
             )}
