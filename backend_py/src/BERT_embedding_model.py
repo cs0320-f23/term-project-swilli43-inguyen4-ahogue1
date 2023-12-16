@@ -227,7 +227,7 @@ def valid_format(LLM_suggestions): bool
         if type(item) is not str:
             return False
     
-    # if LLM_suggestions does not contain 10 suggestions
+    # if LLM_suggestions does not contain 10 suggestions, format is invalid
     if len(LLM_suggestions) is not 10:
         return False
     
