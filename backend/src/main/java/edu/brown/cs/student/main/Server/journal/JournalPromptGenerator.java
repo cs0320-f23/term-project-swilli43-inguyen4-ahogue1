@@ -27,7 +27,7 @@ public class JournalPromptGenerator {
       add("What is your biggest regret?");
       add("Is there anyone in your life you want to reconnect with?");
       add("What are you goals for the next month?");
-      add("Reflect on a time when you had courage and confronted a difficult situation. How did you feel afterwards? Is there anything you've been putting off that would be good to addrerss?");  
+      add("Reflect on a time when you had courage and confronted a difficult situation. How did you feel afterwards? Is there anything you've been putting off that would be good to address?");
       add("What are some goals you have for today?");
       add("What is your greatest fear?");
       add("Is there anything you need to get off your chest?");
