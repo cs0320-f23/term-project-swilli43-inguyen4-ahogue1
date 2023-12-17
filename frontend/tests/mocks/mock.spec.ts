@@ -81,6 +81,23 @@ test("when I press submit, I can see mock suggestions in the suggestions panel",
   await page
     .getByLabel("journal command box")
     .fill("I HATE essays. I LOVE dogs");
+  
+  /* before the submit button is pressed, suggestions are not visible on screen */
+  await expect(page.getByLabel(".suggestions-list li")).not.toBeVisible();
+
   await page.getByLabel("submit button").click();
   // await expect(page.getByLabel("checkbox1").textContent().t
+  // const list = await page.getByLabel(".suggestions-list li");
+  await expect(page.getByLabel(".suggestions-list li")).toBeDefined();
+  // await expect(page.$('ul'))
+
+  const list = await page.waitForSelector('.suggestions-list');
+  const listItems = await list.$$('li');
+  for (const listItem of listItems) {
+    const listItemText = await listItem.textContent();
+    // each list item contains the substring Mock: Suggestion
+    expect(listItemText).toContain("Mock: Suggestion")
+  }
+  // there are 3 mock suggestions
+  expect(listItems.length).toBe(3);
 });

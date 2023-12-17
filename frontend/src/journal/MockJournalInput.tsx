@@ -50,17 +50,6 @@ export default function MockJournalInput(props: JournalInputProps) {
     const mockFetchedDate = mockFetchDate();
     setPrompt(mockFetchedPrompt);
     setDate(mockFetchedDate);
-    // if (typeof(mockFetchedPrompt) === "string") {
-    //   setPrompt(mockFetchedPrompt);
-    // } else {
-    //   alert("error loading mock prompt");
-    // }
-
-    // if (typeof(mockFetchedDate) === "string") {
-    //   setDate(mockFetchedDate);
-    // } else {
-    //   alert("error loading mock date");
-    // }
   });
 
   function errorDisplay(message: string) {
