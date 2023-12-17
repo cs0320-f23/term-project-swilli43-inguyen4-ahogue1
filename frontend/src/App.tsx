@@ -48,15 +48,9 @@ function App() {
     };
   }, []);
 
-  
-
   const handleLogin = () => {
     setIsLoggedIn(true);
   };
-
-  const switchMockingMode = () => {
-    setMocking(!mocking);
-  }
 
   const handleSubmit = () => {
     setIsSubmitted(true);
@@ -77,18 +71,8 @@ function App() {
             onNext={handleSuggestions}
           />
           <div className="righthand-column">
-            
             {isSubmitted ? (
-
-              mocking ? (
-                <div>
-                console.log("entered mocked mode, mocking is " + mocking)
-                <h1>Mocked Suggestion Display</h1>
-                </div>
-
-               ) : (
-                <div className="on-submit-click">
-                  console.log("not in mocking mode, mocking is " + mocking)
+              <div className="on-submit-click">
                 <SuggestionsDisplay
                   currentEntry={currentEntry}
                   displaySuggestions={displaySuggestions}
@@ -97,7 +81,6 @@ function App() {
                   <RandomPlant />
                 </div>
               </div>
-              )
             
             ) : (
               <div className="empty-panel"></div>
