@@ -34,6 +34,8 @@ export default function MockJournalInput(props: JournalInputProps) {
   const [entry, setEntry] = useState<string>("");
   const [prompt, setPrompt] = useState<string>("");
   const [date, setDate] = useState<string>("");
+  const [render, setRender] = useState<number>(0);
+  const [entryNum, setEntryNum] = useState<number>(1);
 
   /* fetch the prompt when the page is started */
   function mockFetchPrompt(): string {
@@ -50,7 +52,12 @@ export default function MockJournalInput(props: JournalInputProps) {
     const mockFetchedDate = mockFetchDate();
     setPrompt(mockFetchedPrompt);
     setDate(mockFetchedDate);
-  });
+  }, []);
+
+  useEffect(() => {
+    // whenver mock next or prev is called, render will be updated, which should 
+    // visually re render the items on the page with the new mock entry objects
+  }, [entryNum]);
 
   function errorDisplay(message: string) {
     const errorDisplay = document.getElementById("error-display");
@@ -62,20 +69,42 @@ export default function MockJournalInput(props: JournalInputProps) {
     }
   }
 
-  const mockPreviousEntry: any = (args: Array<string>) => {
-    setPrompt(mockPrompt2); // TODO: how to fix these?
-    setEntry(mockEntry);
-    setDate(mockDate);
+  function mockPreviousEntry() {
+    const p = mockBackend[entryNum - 1].prompt;
+    const d = mockBackend[entryNum - 1].date;
+    const e = mockBackend[entryNum - 1].entry;
 
-    return mockEntryInfo1;
+    if (typeof p === "string") {
+      setPrompt(p); // TODO: how to fix these?
+    }
+    if (typeof d === "string") {
+      setDate(d); // TODO: how to fix these?
+    }    if (typeof e === "string") {
+      setEntry(e); // TODO: how to fix these?
+    }
+
+    console.log("p: " + p + "\nd: " + d + "\ne: " + e);
+
+    setEntryNum(entryNum - 1);
   };
 
-  const mockNextEntry: any = (args: Array<string>) => {
-    setPrompt(mockPrompt3); // TODO: how to fix these?
-    setEntry(mockEntry2);
-    setDate(mockDate);
+  function mockNextEntry() {
+    const p = mockBackend[entryNum + 1].prompt;
+    const d = mockBackend[entryNum + 1].date;
+    const e = mockBackend[entryNum + 1].entry;
 
-    return mockEntryInfo2;
+    if (typeof p === "string") {
+      setPrompt(p); // TODO: how to fix these?
+    }
+    if (typeof d === "string") {
+      setDate(d); // TODO: how to fix these?
+    }    if (typeof e === "string") {
+      setEntry(e); // TODO: how to fix these?
+    }
+
+    console.log("p: " + p + "\nd: " + d + "\ne: " + e);
+
+    setEntryNum(entryNum + 1);
   };
 
   const handleClick = () => {
@@ -100,27 +129,8 @@ export default function MockJournalInput(props: JournalInputProps) {
   };
 
   function mockAutoSave() {
-    mockBackend.push(mockEntryInfo1); // for if you import mockBackend from mockedData
-    return mockBackend; // then, check if the entry to save exists in the backend
-    // or, pass the backend array in as a parameter, run the autosave function,
-    // then check if the mocked entry exists in the array
+    mockBackend[entryNum].entry = entry;
   }
-
-  // This function is triggered when the button is clicked. Triggers the
-  // populating of suggestions. Sets the current journal entry so that
-  // SuggestionsDisplay can access it
-  // async function handleSubmit(entry: string) {
-  //   props.setDisplaySuggestions(true)
-  //   props.setCurrentEntry(entry)
-  // }
-
-  // handlePrev triggers call to get previous journal entry and passes it to
-  // ControlledInput to re-populate input box with this previous journal entry
-
-  // async function handleNext() {
-  //   props.setDisplaySuggestions(false)
-
-  // }
 
   /* returns component to user: the input box, sets logic for submtting a command on submit button */
   return (
@@ -141,11 +151,11 @@ export default function MockJournalInput(props: JournalInputProps) {
       />
       <div className="button-area">
         <div className="prev-next-menu">
-          <button className="prev-button" onClick={() => mockPreviousEntry}>
+          <button className="prev-button" onClick={() => mockPreviousEntry()}>
             <PrevButton />
             prev
           </button>
-          <button className="next-button" onClick={() => mockNextEntry}>
+          <button className="next-button" onClick={() => mockNextEntry()}>
             <NextButton />
             next
           </button>
