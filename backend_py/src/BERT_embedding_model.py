@@ -4,19 +4,19 @@ from scipy.spatial.distance import cosine
 import openai
 import random
 import sys
+import os
 
-# sys.path.append("../../..") 
-# sys.path.append("../..")
-# sys.path.append("../../../secrets")
-# sys.path.append("../../secrets")
-from os.path import abspath, dirname
+sys.path.append("../../..") 
+sys.path.append("../..")
+sys.path.append("../../../secrets")
+sys.path.append("../../secrets")
 
-current_file_path = abspath(__file__)
-parent_directory = dirname(dirname(current_file_path))
-sys.path.append(parent_directory)
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../..")))
 
-from secrets.API_KEY import OPENAI_API_KEY
-print("api key is: " + OPENAI_API_KEY)
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../secrets")))
+
+from API_KEY import OPENAI_API_KEY
 
 openai.api_key = OPENAI_API_KEY
 
@@ -145,6 +145,7 @@ def get_user_embedding(text_list):
 
 
 def get_suggestions(user_history, user_entry: str):
+    print("running main method to get personalized, ranked suggestions for user")
     """ Main function called in server endpoint
         Returns 3 perosnalized suggestions that are most similar to the user's past choices
     
@@ -192,6 +193,8 @@ def generate_personalized_suggestions(user_entry: str):
     # step 1: prompt LLM & get personalized suggestions
     raw_suggestions = prompt_LLM_for_suggestions(user_entry)
 
+    print(f"Based on user entry, LLM returned \n{raw_suggestions}")
+
     if valid_format(raw_suggestions):
         print("the LLM returned suggestions in a valid format")
         return raw_suggestions
@@ -200,6 +203,8 @@ def generate_personalized_suggestions(user_entry: str):
     else: 
         raw_suggestions2 = reformat_LLM_suggestions(raw_suggestions)
         print("the LLM returned malformatted suggestions")
+        print(f"since the LLM returned malformatted suggestions, another API request was made to \
+            reformat the suggestions. the reformatted suggestions are \n{raw_suggestions2}")
 
         if valid_format(raw_suggestions2):
             print("attempts to reformat malformatted suggestions worked!")
@@ -226,7 +231,7 @@ def prompt_LLM_for_suggestions(user_entry: str):
 
     # define messages array to contain instructions to generate 10 prompts based on user's journal entry
     system_content = "You are an assistant that receives journal entries and recommends wellbeing recommendations in a pythonic, un-named, comma seperated list of strings"
-    LLM_instruction = f"Given this journal entry written by a user, return a python string list of 10 short suggestions you wold give to improve the user's wellbeing. ONLY return an un-named comma separated python list of 10 suggestion strings. \n\nEntry: {user_entry}"
+    LLM_instruction = f"Given this journal entry written by a user, return a comma separated of 10 short suggestions you wold give to improve the user's wellbeing. ONLY return an un-named comma separated python list of 10 suggestion strings. \n\nEntry: {user_entry}"
     system_instruction = {"role":"system", "content": system_content}
     LLM_prompt = {"role": "user", "content": LLM_instruction}
     messages = []
@@ -234,7 +239,29 @@ def prompt_LLM_for_suggestions(user_entry: str):
     messages.append(LLM_prompt)
 
     LLM_response = query_LLM(messages)
-    return LLM_response
+
+    # LLM_response = '"1. Go for a walk", "\n2. Take a nap", "\n3. Go to sleep"'
+    print(f"initial list is: \n{LLM_response}")
+    
+    formatted_LLM_response = LLM_response.replace('"', '') # strip all quotes
+    # formatted_LLM_response = formatted_LLM_response.strip 
+    # remove any numbers (e.g. list numberings)
+    formatted_LLM_response = ''.join(char for char in formatted_LLM_response if not char.isnumeric())
+    # remove any periods (which may linger after removing numbers)
+    formatted_LLM_response = formatted_LLM_response.replace('. ', '')
+    # remove any newline characters
+    formatted_LLM_response = formatted_LLM_response.replace('\n', '')
+
+
+    output_list = formatted_LLM_response.split(", ")
+
+    print(f"output list is: \n{output_list}")
+
+
+    formatted_LLM_response = LLM_response.replace('"', '')
+    output_list = formatted_LLM_response.split(", ")
+
+    return output_list
 
 
 def reformat_LLM_suggestions(raw_suggestions):
@@ -257,8 +284,27 @@ def reformat_LLM_suggestions(raw_suggestions):
     messages.append(system_instruction)
     messages.append(LLM_prompt)
 
-    LLM_response = query_LLM(messages)
-    return LLM_response
+    # LLM_response = query_LLM(messages) # TODO: uncomment this
+
+    LLM_response = '"1. Go for a walk", "\n2. Take a nap", "\n3. Go to sleep"'
+    
+    formatted_LLM_response = LLM_response.replace('"', '') # strip all quotes
+    # formatted_LLM_response = formatted_LLM_response.strip 
+
+    # remove any numbers (e.g. list numberings)
+    # output_string = re.sub(r'\d+', '', input_string)
+    formatted_LLM_response = ''.join(char for char in formatted_LLM_response if not char.isnumeric())
+
+    # remove any newline characters
+    formatted_LLM_response = formatted_LLM_response.replace('\n', '')
+
+    output_list = formatted_LLM_response.split(", ")
+
+    print(f"output list is: \n{output_list}")
+
+    sys.exit()
+
+    return output_list
 
 
 def query_LLM(messages):
