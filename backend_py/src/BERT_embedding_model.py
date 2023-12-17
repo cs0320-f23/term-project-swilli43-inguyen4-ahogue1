@@ -3,6 +3,11 @@ from transformers import BertTokenizer, BertModel
 from scipy.spatial.distance import cosine
 import openai
 import random
+import sys
+
+sys.path.append("../../..") 
+from ...secrets.API_KEY import OPENAI_API_KEY
+openai.api_key = OPENAI_API_KEY
 
 # Load pre-trained model tokenizer (vocabulary)
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
@@ -127,31 +132,10 @@ def get_user_embedding(text_list):
     user_embedding = torch.mean(user_tensor, dim=0)
     return user_embedding
 
-def rank_suggestions(user_embedding, suggestion_list):
-    """ Ranks the suggestions for the user (based on similarity to user's past choices)
-
-        Parameters:
-        - user_embedding: a vector representing the user's past choices
-        - suggestion_list List[str]: a list of 10 suggestions for the user
-
-        Returns:
-        - ranked_suggestions: a ranked list of user suggestions
-    """
-    suggestion2similarity = {}
-    for suggestion in suggestion_list:
-        suggestion_similarity_score = calculate_similarity_between_user_and_suggestion(user_embedding=user_embedding,
-                                                                                       suggestion=suggestion)
-        suggestion2similarity[suggestion] = suggestion_similarity_score
-
-    # sort the suggestions in order of similarity to the user
-    sorted_suggestion2similarity = sorted(suggestion2similarity.items(), key=lambda x:x[1], reverse=True)
-    print(f"the sorted suggestions are: ")
-    [print(x) for x in sorted_suggestion2similarity]
-    return sorted_suggestion2similarity
-
 
 def get_suggestions(user_history, user_entry: str):
-    """ Returns 3 perosnalized suggestions that are most similar to the user's past choices
+    """ Main function called in server endpoint
+        Returns 3 perosnalized suggestions that are most similar to the user's past choices
     
         Parameters:
         - user_history List[str]: a list of the past suggestions the user has clicked on
@@ -178,6 +162,44 @@ def get_suggestions(user_history, user_entry: str):
     
     return final_suggestion_list
 
+def generate_personalized_suggestions(user_entry: str):
+    """ Main function to generate suggestions for user.
+
+        Queries the LLM to generate personalized suggestions based on the user 
+        entry. Confirms that LLM response is properly formatted. If it's not,
+        makes an attempt to re-format the list of personalized suggestions. If
+        that doesn't work, instead return 10 randomly selected suggestions from
+        a pre-defined bank of suggestions.
+    
+        Parameters:
+        - user_entry (str): to send to LLM to generate personalized 
+
+        Returns:
+        - List[str]: 10 properly formatted wellbeing suggestions for the user
+    """
+    
+    # step 1: prompt LLM & get personalized suggestions
+    raw_suggestions = prompt_LLM_for_suggestions(user_entry)
+
+    if valid_format(raw_suggestions):
+        print("the LLM returned suggestions in a valid format")
+        return raw_suggestions
+    
+    # if LLM response is malformatted, attempt to reformat
+    else: 
+        raw_suggestions2 = reformat_LLM_suggestions(raw_suggestions)
+        print("the LLM returned malformatted suggestions")
+
+        if valid_format(raw_suggestions2):
+            print("attempts to reformat malformatted suggestions worked!")
+            return raw_suggestions2
+        
+        # if LLM response is still malformatted, randmoly select 10 suggestions from 
+        # a predefined bank
+        else: 
+            print("since the LLM failed again to return properly formatted suggestions, drawing from suggestion bank instead")
+            suggestions = get_10_predefined_suggestions()
+            return suggestions
 
 def prompt_LLM_for_suggestions(user_entry: str):
     """
@@ -261,42 +283,27 @@ def get_10_predefined_suggestions():
 
     return random_suggestions
 
+def rank_suggestions(user_embedding, suggestion_list):
+    """ Ranks the suggestions for the user (based on similarity to user's past choices)
 
-def generate_personalized_suggestions(user_entry: str):
-    """ Main function to generate suggestions for user.
-
-        Queries the LLM to generate personalized suggestions based on the user 
-        entry. Confirms that LLM response is properly formatted. If it's not,
-        makes an attempt to re-format the list of personalized suggestions. If
-        that doesn't work, instead return 10 randomly selected suggestions from
-        a pre-defined bank of suggestions.
-    
         Parameters:
-        - user_entry (str): to send to LLM to generate personalized 
+        - user_embedding: a vector representing the user's past choices
+        - suggestion_list List[str]: a list of 10 suggestions for the user
 
         Returns:
-        - List[str]: 10 properly formatted wellbeing suggestions for the user
+        - ranked_suggestions: a ranked list of user suggestions
     """
+    suggestion2similarity = {}
+    for suggestion in suggestion_list:
+        suggestion_similarity_score = calculate_similarity_between_user_and_suggestion(user_embedding=user_embedding,
+                                                                                       suggestion=suggestion)
+        suggestion2similarity[suggestion] = suggestion_similarity_score
 
-    # step 1: prompt LLM & get personalized suggestions
-    raw_suggestions = prompt_LLM_for_suggestions(user_entry)
-
-    if valid_format(raw_suggestions):
-        return raw_suggestions
-    
-    # if LLM response is malformatted, attempt to reformat
-    else: 
-        raw_suggestions2 = reformat_LLM_suggestions(raw_suggestions)
-
-        if valid_format(raw_suggestions2):
-            return raw_suggestions2
-        
-        # if LLM response is still malformatted, randmoly select 10 suggestions from 
-        # a predefined bank
-        else: 
-            suggestions = get_10_predefined_suggestions()
-            return suggestions
-
+    # sort the suggestions in order of similarity to the user
+    sorted_suggestion2similarity = sorted(suggestion2similarity.items(), key=lambda x:x[1], reverse=True)
+    print(f"the sorted suggestions are: ")
+    [print(x) for x in sorted_suggestion2similarity]
+    return sorted_suggestion2similarity
 
 def valid_format(LLM_suggestions): 
     """ Check if LLM_suggestions is properly formatted as a list of 10 strings
@@ -354,7 +361,8 @@ user_history = ["Take a walk outside",
 
 print("\nfinal suggestion list:")
 mock_user_entry = "happy"
-print(get_suggestions(user_history, mock_user_entry))
+# print(get_suggestions(user_history, mock_user_entry))
+
 
 
 # get_embedding("Go outside for a walk.")
