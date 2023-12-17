@@ -13,10 +13,10 @@ sys.path.append("../../secrets")
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../..")))
 
-
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../secrets")))
 
 from API_KEY import OPENAI_API_KEY
+# from secrets.API_KEY import OPENAI_API_KEY
 
 openai.api_key = OPENAI_API_KEY
 
@@ -381,33 +381,33 @@ def get_mocked_suggestions():
 
     #TODO: replace mocked suggestion list with real query to an LLM that dyanmically generates 
     # a list of 10 suggestions based on entry 
-    mocked_suggestion_list = ["Practice deep breathing exercises",
-    "Try progressive muscle relaxation (PMR)",
-    "Take a walk",
-    "Participate in physical exercise",
-    "Listen to a calming music playlist",
-    "Read a book",
-    "Take short breaks to refresh your mind",
-    "Incorporate yoga for mindfulness",
-    "Spend time in nature",
-    "Enjoy a good laugh with comedy"]
+    # mocked_suggestion_list = ["Practice deep breathing exercises",
+    # "Try progressive muscle relaxation (PMR)",
+    # "Take a walk",
+    # "Participate in physical exercise",
+    # "Listen to a calming music playlist",
+    # "Read a book",
+    # "Take short breaks to refresh your mind",
+    # "Incorporate yoga for mindfulness",
+    # "Spend time in nature",
+    # "Enjoy a good laugh with comedy"]
 
-    return mocked_suggestion_list
+    # return mocked_suggestion_list
         
 
-user_history = ["Take a walk outside",
-    "Go for a run",
-    "Hike a trail nearby",
-    "Try yoga or stretching",
-    "Go cycling on a path",
-    "Plan a camping trip"]
+# user_history = ["Take a walk outside",
+#     "Go for a run",
+#     "Hike a trail nearby",
+#     "Try yoga or stretching",
+#     "Go cycling on a path",
+#     "Plan a camping trip"]
  
 
-print("\nfinal suggestion list:")
-mock_user_entry = "happy"
+# print("\nfinal suggestion list:")
+# mock_user_entry = "happy"
 # print(get_suggestions(user_history, mock_user_entry))
 
-get_suggestions(user_history, mock_user_entry)
+# get_suggestions(user_history, mock_user_entry)
 
 
 # get_embedding("Go outside for a walk.")

@@ -6,3 +6,4 @@ backend_py/env
 
 # misc 
 /.pytest_cache
+.vscode/
