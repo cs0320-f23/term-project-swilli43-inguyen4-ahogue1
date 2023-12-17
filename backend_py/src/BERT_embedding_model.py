@@ -231,7 +231,7 @@ def prompt_LLM_for_suggestions(user_entry: str):
 
     # define messages array to contain instructions to generate 10 prompts based on user's journal entry
     system_content = "You are an assistant that receives journal entries and recommends wellbeing recommendations in a pythonic, un-named, comma seperated list of strings"
-    LLM_instruction = f"Given this journal entry written by a user, return a comma separated of 10 short suggestions you wold give to improve the user's wellbeing. ONLY return an un-named comma separated python list of 10 suggestion strings. \n\nEntry: {user_entry}"
+    LLM_instruction = f"Given this journal entry written by a user, return a comma separated list of 10 short suggestions you wold give to improve the user's wellbeing. ONLY return an un-named comma separated python list of 10 suggestions. Do not include numbers or new line chracters. \n\nEntry: {user_entry}"
     system_instruction = {"role":"system", "content": system_content}
     LLM_prompt = {"role": "user", "content": LLM_instruction}
     messages = []
@@ -241,8 +241,6 @@ def prompt_LLM_for_suggestions(user_entry: str):
     LLM_response = query_LLM(messages)
 
     # LLM_response = '"1. Go for a walk", "\n2. Take a nap", "\n3. Go to sleep"'
-    print(f"initial list is: \n{LLM_response}")
-    
     formatted_LLM_response = LLM_response.replace('"', '') # strip all quotes
     # formatted_LLM_response = formatted_LLM_response.strip 
     # remove any numbers (e.g. list numberings)
@@ -251,15 +249,10 @@ def prompt_LLM_for_suggestions(user_entry: str):
     formatted_LLM_response = formatted_LLM_response.replace('. ', '')
     # remove any newline characters
     formatted_LLM_response = formatted_LLM_response.replace('\n', '')
-
-
+    formatted_LLM_response = formatted_LLM_response.lower() # make all lower case to avoid case anomolies
     output_list = formatted_LLM_response.split(", ")
 
-    print(f"output list is: \n{output_list}")
-
-
-    formatted_LLM_response = LLM_response.replace('"', '')
-    output_list = formatted_LLM_response.split(", ")
+    print(f"after the first call to the LLM, the suggestions is {output_list}")
 
     return output_list
 
@@ -284,25 +277,19 @@ def reformat_LLM_suggestions(raw_suggestions):
     messages.append(system_instruction)
     messages.append(LLM_prompt)
 
-    # LLM_response = query_LLM(messages) # TODO: uncomment this
+    LLM_response = query_LLM(messages) # TODO: uncomment this
 
-    LLM_response = '"1. Go for a walk", "\n2. Take a nap", "\n3. Go to sleep"'
-    
     formatted_LLM_response = LLM_response.replace('"', '') # strip all quotes
-    # formatted_LLM_response = formatted_LLM_response.strip 
-
     # remove any numbers (e.g. list numberings)
-    # output_string = re.sub(r'\d+', '', input_string)
     formatted_LLM_response = ''.join(char for char in formatted_LLM_response if not char.isnumeric())
-
+    # remove any periods (which may linger after removing numbers)
+    formatted_LLM_response = formatted_LLM_response.replace('. ', '')
     # remove any newline characters
     formatted_LLM_response = formatted_LLM_response.replace('\n', '')
-
+    formatted_LLM_response = formatted_LLM_response.lower() # make all lower case to avoid case anomolies
     output_list = formatted_LLM_response.split(", ")
 
-    print(f"output list is: \n{output_list}")
-
-    sys.exit()
+    print(f"after querying the LLM to reformat the initial LLM response, the suggestions list is {output_list}")
 
     return output_list
 
