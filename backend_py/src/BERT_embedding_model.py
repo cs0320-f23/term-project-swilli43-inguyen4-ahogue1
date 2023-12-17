@@ -5,8 +5,19 @@ import openai
 import random
 import sys
 
-sys.path.append("../../..") 
-from ...secrets.API_KEY import OPENAI_API_KEY
+# sys.path.append("../../..") 
+# sys.path.append("../..")
+# sys.path.append("../../../secrets")
+# sys.path.append("../../secrets")
+from os.path import abspath, dirname
+
+current_file_path = abspath(__file__)
+parent_directory = dirname(dirname(current_file_path))
+sys.path.append(parent_directory)
+
+from secrets.API_KEY import OPENAI_API_KEY
+print("api key is: " + OPENAI_API_KEY)
+
 openai.api_key = OPENAI_API_KEY
 
 # Load pre-trained model tokenizer (vocabulary)
@@ -324,7 +335,7 @@ def valid_format(LLM_suggestions):
             return False
     
     # if LLM_suggestions does not contain 10 suggestions, format is invalid
-    if len(LLM_suggestions) is not 10:
+    if len(LLM_suggestions) != 10:
         return False
     
     # if the list is a list of 10 strings, it's format is valid
@@ -363,6 +374,7 @@ print("\nfinal suggestion list:")
 mock_user_entry = "happy"
 # print(get_suggestions(user_history, mock_user_entry))
 
+get_suggestions(user_history, mock_user_entry)
 
 
 # get_embedding("Go outside for a walk.")
