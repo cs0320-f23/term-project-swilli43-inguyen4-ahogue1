@@ -19,7 +19,7 @@ function App() {
   const [displaySuggestions, setDisplaySuggestions] = useState<boolean>(false);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false); // Track login state
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false); // Track submit state
-  const [mocking, setMocking] = useState<boolean>(true);
+  const [mocking, setMocking] = useState<boolean>(false);
 
   document.addEventListener("keydown", (event: KeyboardEvent) => {
     /* These are some keyboard shortcuts! */
