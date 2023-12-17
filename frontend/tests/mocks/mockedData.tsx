@@ -10,3 +10,5 @@ export const mockEntry2: string = "Mock: After journaling about my sadness and g
 export const mockEntryInfo1: EntryInfo = new EntryInfo(mockPrompt2, mockEntry, mockDate);
 export const mockEntryInfo2: EntryInfo = new EntryInfo(mockPrompt3, mockEntry2, mockDate);
 export const mockBackend: EntryInfo[] = [];
+
+export const mockSuggestions = ["Mock: Suggestion 1", "Mock: Suggestion 2", "Mock: Suggestion 3"]

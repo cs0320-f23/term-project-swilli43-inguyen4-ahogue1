@@ -19,6 +19,7 @@ function App() {
   const [displaySuggestions, setDisplaySuggestions] = useState<boolean>(false);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false); // Track login state
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false); // Track submit state
+  const [mocking, setMocking] = useState<boolean>(true);
 
   document.addEventListener("keydown", (event: KeyboardEvent) => {
     /* These are some keyboard shortcuts! */
@@ -28,6 +29,21 @@ function App() {
       document.getElementById("submit-button")?.focus();
       document.getElementById("login-button")?.focus();
     }
+    if (
+      (event.ctrlKey) && event.shiftKey &&
+      event.code === "KeyM"
+    ) {
+      setMocking(!mocking);
+      console.log("switched modes, mocking is " + mocking);
+    }
+    // if ((event.ctrlKey) && event.shiftKey && event.code === "KeyM") {
+    //   if (event.repeat) {
+    //     console.log("mock keyes repeated. mock is " + mocking);
+    //     return
+    //   }
+    //   console.log("the mocking keys are being held down, but the mocking state isn't changing because of the repeat clause. mocking is " + mocking);
+    //   setMocking(!mocking)
+    // }
   });
 
   useEffect(() => {
@@ -46,6 +62,10 @@ function App() {
       document.removeEventListener("keydown", handleKeyPress);
     };
   }, []);
+
+  useEffect(() => { // whenever the mode is updated from mock to not mock, re render the page
+    }, [mocking]);
+  
 
   const handleLogin = () => {
     setIsLoggedIn(true);
@@ -68,6 +88,7 @@ function App() {
             setDisplaySuggestions={setDisplaySuggestions}
             onSubmit={handleSubmit}
             onNext={handleSuggestions}
+            mockMode={mocking}
           />
           <div className="righthand-column">
             {isSubmitted ? (
@@ -75,6 +96,7 @@ function App() {
                 <SuggestionsDisplay
                   currentEntry={currentEntry}
                   displaySuggestions={displaySuggestions}
+                  mockMode={mocking}
                 />
                 <div className="plant-image">
                   <RandomPlant />

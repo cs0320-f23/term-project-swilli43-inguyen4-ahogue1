@@ -12,6 +12,9 @@ from src import BERT_embedding_model as bert
 app = Flask(__name__)
 
 user_history = [] # a list of all the suggestions a user has clicked on 
+
+user_history = ["read something intruiging", "play a video game to relax", "try a mindfulness meditation", "practice 4-7-8 breathing", "cook something that brings you joy"]
+
 user_vector = 0
 
 # to run locally & externally:
@@ -35,6 +38,7 @@ def before_request():
 # Enable CORS for all routes
 @app.after_request
 def after_request(response):
+    response.headers.add('Access-Control-Allow-Origin', 'http://localhost:5173')
     response.headers.add('Access-Control-Allow-Origin', 'http://localhost:5174')
     response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
     response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')

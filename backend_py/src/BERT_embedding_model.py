@@ -203,17 +203,16 @@ def generate_LLM_suggestions(user_entry: str):
     return mocked_suggestion_list
         
 
-user_history = ["Take a walk outside",
-    "Go for a run",
-    "Hike a trail nearby",
-    "Try yoga or stretching",
-    "Go cycling on a path",
-    "Plan a camping trip"]
- 
+# user_history = ["Take a walk outside",
+#     "Go for a run",
+#     "Hike a trail nearby",
+#     "Try yoga or stretching",
+#     "Go cycling on a path",
+#     "Plan a camping trip"] 
 
-print("\nfinal suggestion list:")
-mock_user_entry = "happy"
-print(get_suggestions(user_history, mock_user_entry))
+# print("\nfinal suggestion list:")
+# mock_user_entry = "happy"
+# print(get_suggestions(user_history, mock_user_entry))
 
 
 # get_embedding("Go outside for a walk.")

@@ -71,3 +71,16 @@ test("when the submit button is clicked, the suggestions panel is displayed", as
   await expect(page.getByLabel("suggestions list")).toBeVisible();
   await expect(page.getByLabel("random plant image")).toBeVisible();
 });
+
+test("when I press submit, I can see mock suggestions in the suggestions panel", async ({
+  page,
+}) => {
+  await page.goto("http://localhost:5173/");
+  await page.getByLabel("login button").click();
+  await page.getByLabel("journal command box").click();
+  await page
+    .getByLabel("journal command box")
+    .fill("I HATE essays. I LOVE dogs");
+  await page.getByLabel("submit button").click();
+  // await expect(page.getByLabel("checkbox1").textContent().t
+});
