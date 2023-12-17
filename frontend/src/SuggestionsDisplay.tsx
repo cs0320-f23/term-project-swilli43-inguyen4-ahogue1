@@ -10,12 +10,8 @@ interface SuggestionsProps {
 
 /* The main repl component that contains the shared history state and displays the history and input. */
 export default function SuggestionsDisplay(props: SuggestionsProps) {
-  const [suggestion, setSuggestion] = useState<Array<string>>([]);
-  var flaskIPAddress = "http://10.38.47.19:5001/"; // of python server running on flask handling suggestion generation
-  
 
-
-  document.addEventListener("keydown", (event: KeyboardEvent) => {
+    document.addEventListener("keydown", (event: KeyboardEvent) => {
     if ( // if first suggestion is clicked using keyboard input
       (event.ctrlKey) && event.shiftKey &&
       event.code === "Digit1"
@@ -37,6 +33,9 @@ export default function SuggestionsDisplay(props: SuggestionsProps) {
     }
   });
 
+  const [suggestion, setSuggestion] = useState<Array<string>>([]);
+  var flaskIPAddress = "http://10.38.47.19:5001/"; // of python server running on flask handling suggestion generation
+  
 
   useEffect(() => {
     const fetchSuggestions = async () => {
@@ -44,7 +43,8 @@ export default function SuggestionsDisplay(props: SuggestionsProps) {
         const link = flaskIPAddress + "getsuggestions?entry=" + props.currentEntry;
         const response = await fetch(link);
         const data = await response.json();
-        setSuggestion(data || []);
+        setSuggestion(data.suggestions || []);
+        console.log("retrieved suggestions from flask are: " + data.suggestions)
       } catch (error) {
         console.error("Error fetching suggestions:", error);
       }
@@ -87,17 +87,17 @@ export default function SuggestionsDisplay(props: SuggestionsProps) {
             <li>
               <input type="checkbox" id="checkbox1" onChange={() => handleClick(suggestion[0])}>
               </input>
-              <label htmlFor="checkbox1">1: {suggestion[0]}</label>
+              <label htmlFor="checkbox1">{suggestion[0]}</label>
             </li>
             <hr className="list-division"></hr>
             <li>
               <input type="checkbox" id="checkbox2" onChange={() => handleClick(suggestion[1])}></input>
-              <label htmlFor="checkbox2">2: {suggestion[1]}</label>
+              <label htmlFor="checkbox2">{suggestion[1]}</label>
             </li>
             <hr className="list-division"></hr>
             <li>
               <input type="checkbox" id="checkbox3" onChange={() => handleClick(suggestion[2])}></input>
-              <label htmlFor="checkbox3">3: {suggestion[2]}</label>
+              <label htmlFor="checkbox3">{suggestion[2]}</label>
             </li>
           </ul>
         </body>

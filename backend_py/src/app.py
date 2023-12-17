@@ -32,6 +32,14 @@ def before_request():
 
     pass
 
+# Enable CORS for all routes
+@app.after_request
+def after_request(response):
+    response.headers.add('Access-Control-Allow-Origin', 'http://localhost:5174')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+    response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+    return response
+
 @app.route("/")
 def homepage():
     return f"<p>Homepage: Backend Python Server of Journal Buddy!</p>"
@@ -84,7 +92,7 @@ def generateSuggestionList():
     try:
         print("try block reached")
         top_3_suggestions = bert.get_suggestions(user_history=mock_user_history, user_entry=user_entry)
-        print(f"top 3 suggestions are {top_3_suggestions} for user with history {mock_user_history}")
+        print(f"\ntop 3 suggestions are {top_3_suggestions} for user with history {mock_user_history}\n")
         responseMap = {"result": "success", "suggestions": top_3_suggestions}
         return responseMap
     except:

@@ -1,0 +1,8 @@
+frontend/node_modules
+
+secrets/
+
+backend_py/env
+
+# misc 
+/.pytest_cache
