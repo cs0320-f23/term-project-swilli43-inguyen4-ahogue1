@@ -8,6 +8,7 @@ interface JournalProps {
   setDisplaySuggestions: (display: boolean) => void;
   onSubmit: () => void;
   onNext: () => void;
+  mockMode: boolean;
   // isSubmitted: boolean;
 }
 
@@ -51,24 +52,15 @@ export default function JournalDisplay(props: JournalProps) {
 
   return (
     <div className="journal-display" aria-label="journal">
-      {/* <JournalPrompt/> */}
-
-      {mocking ? (
-        // if in mocking mode, show MockJournalInput
-      <MockJournalInput
+      { props.mockMode ? (
+        <MockJournalInput
         onSubmit={() => {
           props.setDisplaySuggestions(true);
           props.onSubmit();
         }}
-        // history={history}
-        // setHistory={setHistory}
-        // mode={mode}
-        // setMode={setMode}
-        setCurrentEntry={props.setCurrentEntry}
-      />
-
-      ) : ( // else, show JournalInput
-
+          setCurrentEntry={props.setCurrentEntry}
+        /> 
+      ) : (
         <JournalInput
         onSubmit={() => {
           props.setDisplaySuggestions(true);
@@ -78,13 +70,9 @@ export default function JournalDisplay(props: JournalProps) {
           props.setDisplaySuggestions(false);
           props.onNext();
         }}
-        // history={history}
-        // setHistory={setHistory}
-        // mode={mode}
-        // setMode={setMode}
         setCurrentEntry={props.setCurrentEntry}
       />
-
+        
       )}
 
     </div>

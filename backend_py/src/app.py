@@ -12,6 +12,9 @@ from src import BERT_embedding_model as bert
 app = Flask(__name__)
 
 user_history = [] # a list of all the suggestions a user has clicked on 
+
+user_history = ["read something intruiging", "play a video game to relax", "try a mindfulness meditation", "practice 4-7-8 breathing", "cook something that brings you joy"]
+
 user_vector = 0
 
 # initialize user history w/ Tim's wellness activities
