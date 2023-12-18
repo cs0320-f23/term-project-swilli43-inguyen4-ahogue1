@@ -8,13 +8,15 @@ interface JournalProps {
   setDisplaySuggestions: (display: boolean) => void;
   onSubmit: () => void;
   onNext: () => void;
+  mockMode: boolean;
   // isSubmitted: boolean;
 }
 
 
 export default function JournalDisplay(props: JournalProps) {
   // const [history, setHistory] = useState<EntryInfo[]>([]);
-  // const [prompt, setPrompt] = useState<string>(""); // 
+  // const [prompt, setPrompt] = useState<string>(""); //
+  const [mocking, setMocking] = useState<boolean>(false); 
   
 
   // useEffect(() => {
@@ -23,6 +25,11 @@ export default function JournalDisplay(props: JournalProps) {
   //     props.setDisplaySuggestions(true);
   //   }
   // }, [props.isSubmitted]);
+
+  useEffect(() => {
+    // whenever mocking boolean is flipped, re render the page
+
+  }, [mocking])
 
   document.addEventListener("keydown", (event) => {
     if (event.key === "tab") {
@@ -34,23 +41,27 @@ export default function JournalDisplay(props: JournalProps) {
         textBox.focus();
       }
     }
+    if (
+      (event.ctrlKey) && event.shiftKey &&
+      event.code === "KeyM"
+    ) {
+      setMocking(!mocking);
+      console.log("switched modes, mocking is " + mocking);
+    }
   });
 
   return (
     <div className="journal-display" aria-label="journal">
-      {/* <JournalPrompt/> */}
-      {/* <MockJournalInput
+      { props.mockMode ? (
+        <MockJournalInput
         onSubmit={() => {
           props.setDisplaySuggestions(true);
           props.onSubmit();
         }}
-        // history={history}
-        // setHistory={setHistory}
-        // mode={mode}
-        // setMode={setMode}
-        setCurrentEntry={props.setCurrentEntry}
-      /> */}
-      <JournalInput
+          setCurrentEntry={props.setCurrentEntry}
+        /> 
+      ) : (
+        <JournalInput
         onSubmit={() => {
           props.setDisplaySuggestions(true);
           props.onSubmit();
@@ -59,12 +70,11 @@ export default function JournalDisplay(props: JournalProps) {
           props.setDisplaySuggestions(false);
           props.onNext();
         }}
-        // history={history}
-        // setHistory={setHistory}
-        // mode={mode}
-        // setMode={setMode}
         setCurrentEntry={props.setCurrentEntry}
       />
+        
+      )}
+
     </div>
   );
 }

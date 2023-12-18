@@ -1,11 +1,13 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import "./styles/suggestions.css";
 import rectangle from "./assets/rectangle.png";
+import {mockSuggestions} from "../tests/mocks/mockedData";
 
 
 interface SuggestionsProps {
   currentEntry: string;
   displaySuggestions: boolean;
+  mockMode: boolean;
 }
 
 /* The main repl component that contains the shared history state and displays the history and input. */
@@ -34,23 +36,28 @@ export default function SuggestionsDisplay(props: SuggestionsProps) {
   });
 
   const [suggestion, setSuggestion] = useState<Array<string>>([]);
-  var flaskIPAddress = "http://10.38.47.19:5001/"; // of python server running on flask handling suggestion generation
+  var flaskIPAddress = "http://192.168.210.249:5001/"; // of python server running on flask handling suggestion generation
   
 
   useEffect(() => {
     const fetchSuggestions = async () => {
       try {
+        if (props.mockMode) {
+          setSuggestion(mockSuggestions);
+        } else {
         const link = flaskIPAddress + "getsuggestions?entry=" + props.currentEntry;
         const response = await fetch(link);
+        console.log("making fetch call to pytho backend");
         const data = await response.json();
         setSuggestion(data.suggestions || []);
         console.log("retrieved suggestions from flask are: " + data.suggestions)
+        }
       } catch (error) {
         console.error("Error fetching suggestions:", error);
       }
     };
     fetchSuggestions();
-  }, [props.currentEntry]);
+  }, [props.currentEntry, props.mockMode]);
 
   // const suggestions = (args: string): Promise<Array<string> | undefined> => {
   //   const link = "http://localhost:3232/getsuggestions?entry=" + props.currentEntry;
