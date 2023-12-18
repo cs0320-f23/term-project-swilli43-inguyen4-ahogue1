@@ -8,3 +8,5 @@ backend_py/env
 /.pytest_cache
 .vscode/
 .DS_Store
+
+/.vscode
