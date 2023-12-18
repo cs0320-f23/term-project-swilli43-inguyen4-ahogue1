@@ -102,6 +102,7 @@ function App() {
                   <RandomPlant />
                 </div>
               </div>
+            
             ) : (
               <div className="empty-panel"></div>
             )}

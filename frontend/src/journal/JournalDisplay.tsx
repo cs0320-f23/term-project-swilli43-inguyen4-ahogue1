@@ -15,7 +15,8 @@ interface JournalProps {
 
 export default function JournalDisplay(props: JournalProps) {
   // const [history, setHistory] = useState<EntryInfo[]>([]);
-  // const [prompt, setPrompt] = useState<string>(""); // 
+  // const [prompt, setPrompt] = useState<string>(""); //
+  const [mocking, setMocking] = useState<boolean>(false); 
   
 
   // useEffect(() => {
@@ -24,6 +25,11 @@ export default function JournalDisplay(props: JournalProps) {
   //     props.setDisplaySuggestions(true);
   //   }
   // }, [props.isSubmitted]);
+
+  useEffect(() => {
+    // whenever mocking boolean is flipped, re render the page
+
+  }, [mocking])
 
   document.addEventListener("keydown", (event) => {
     if (event.key === "tab") {
@@ -34,6 +40,13 @@ export default function JournalDisplay(props: JournalProps) {
       if (textBox) {
         textBox.focus();
       }
+    }
+    if (
+      (event.ctrlKey) && event.shiftKey &&
+      event.code === "KeyM"
+    ) {
+      setMocking(!mocking);
+      console.log("switched modes, mocking is " + mocking);
     }
   });
 

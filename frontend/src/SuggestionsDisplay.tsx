@@ -36,7 +36,7 @@ export default function SuggestionsDisplay(props: SuggestionsProps) {
   });
 
   const [suggestion, setSuggestion] = useState<Array<string>>([]);
-  var flaskIPAddress = "http://10.38.47.19:5001/"; // of python server running on flask handling suggestion generation
+  var flaskIPAddress = "http://192.168.210.249:5001/"; // of python server running on flask handling suggestion generation
   
 
   useEffect(() => {
@@ -47,6 +47,7 @@ export default function SuggestionsDisplay(props: SuggestionsProps) {
         } else {
         const link = flaskIPAddress + "getsuggestions?entry=" + props.currentEntry;
         const response = await fetch(link);
+        console.log("making fetch call to pytho backend");
         const data = await response.json();
         setSuggestion(data.suggestions || []);
         console.log("retrieved suggestions from flask are: " + data.suggestions)
