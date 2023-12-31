@@ -30,6 +30,15 @@ Selena (swilli43) is studying computer science at Brown University (2025) and is
 Ilana (inguyen4) is studying computer science at Brown University (2026).  
 Alex (ahogue1) is studying computer science and visual arts at Brown University and the Rhode Island School of Design (RISD) as a dual degree student.
 
+## Future Work
+We are all very passionate about mental health and wellbeing. We would love to grow the project in the future if we have time in an effort to make mental health more accessible. National MH data shows a significant lack of access and need for these resources among to college students and people everywhere. We would love to help democratize mental health by allowing simple data-driven tools like this increase access to mental health tools and resources. 
+
+We see the following opportunities to build the project in the future:
+1. Integrating with firebase to support multiple users through firebase auth & database
+2. Add a cute loading animation so that while the user is waiting for their personalized results to come back, they know they are loading and have something engaging to look at
+3. Add a shuffle prompt button
+4. Add a dark mode button or keyboard shortcut that would allow the webpage to be displayed in a dark theme
+
 ## Design Choices
 
 We have two backend servers. The first is a flask (python) server which handles (1) calls to the OpenAI API, (2) converting suggestions and user history to vector embeddings via the open source BERT embeddings model, and (3) calculating and returning the top 3 personalized suggestions.
@@ -61,13 +70,3 @@ To run our integration tests: run App.spec.ts using playwright in frontend/tests
 To run our mocked tests:
 * switch to mocked mode by using the keyboard shortcut ctrl + shift + m
 * run mock.spec.ts using playwright in frontend/tests/mocks
-
-
-## Future Work
-We are all very passionate about mental health and wellbeing. We would love to grow the project in the future if we have time in an effort to make mental health more accessible. National MH data shows a significant lack of access and need for these resources among to college students and people everywhere. We would love to help democratize mental health by allowing simple data-driven tools like this increase access to mental health tools and resources. 
-
-We see the following opportunities to build the project in the future:
-1. Integrating with firebase to support multiple users through firebase auth & database
-2. Add a cute loading animation so that while the user is waiting for their personalized results to come back, they know they are loading and have something engaging to look at
-3. Add a shuffle prompt button
-4. Add a dark mode button or keyboard shortcut that would allow the webpage to be displayed in a dark theme
