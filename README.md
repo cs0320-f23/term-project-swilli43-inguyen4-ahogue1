@@ -4,11 +4,12 @@
 
 We created a journaling webapp that provides random daily reflection questions and offers personalized recommendations intended for college students struggling with or working on improving their mental health.
 
-<img width="1352" alt="Screenshot 2023-12-31 at 11 26 06 AM" src="https://github.com/cs0320-f23/term-project-swilli43-inguyen4-ahogue1/assets/113455000/279d859c-1589-4874-850b-2d0e77e60fa2">
+<img width="1000" alt="Screenshot 2023-12-31 at 11 25 55 AM" src="https://github.com/cs0320-f23/term-project-swilli43-inguyen4-ahogue1/assets/113455000/e6bc1331-bc97-4a8f-8a79-aaf1ffc60f16">
+
 
 The web app has a journaling section that allows a user to journal according to the prompt, and then generates personalized suggestions using AI and a custom recommender system we built. 
 
-<img width="1355" alt="Screenshot 2023-12-31 at 11 21 26 AM" src="https://github.com/cs0320-f23/term-project-swilli43-inguyen4-ahogue1/assets/113455000/6523945b-d9ce-47c3-b966-520f03336750">
+<img width="1000" alt="Screenshot 2023-12-31 at 11 21 26 AM" src="https://github.com/cs0320-f23/term-project-swilli43-inguyen4-ahogue1/assets/113455000/6523945b-d9ce-47c3-b966-520f03336750">
 
 We also added mocked log ins and registration pages to the repo, with the idea of integrating with firebase in the future.
 
