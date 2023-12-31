@@ -18,7 +18,10 @@ Keyboard shortcuts are:
 Our stakeholder interviews and lived experiences led us to realize that there is a significant problem with sustained engagement with mental health apps. In addition to the personalzied functionality, we added a cute, random plant graphic that is displayed for each journal entry when the user clicks the generate wellbeing suggestions button. Based on stakeholder suggestions, we sought to create a fun, simple engagement feature that could incentivize sustained use, similar to Plant Nanny.
 
 ## About the Team
-Team githubs: ahogue1, swilli43, and inguyen4.  Selena (swilli43) is studying computer science at Brown University (2025) and is minoring in Entrepeneurship.  Ilana (inguyen4) is studying computer science at Brown University (2026).  Alex (ahogue1) is studying computer science and visual arts at Brown University and the Rhode Island School of Design (RISD) as a dual degree student.
+Team githubs: ahogue1, swilli43, and inguyen4.  
+Selena (swilli43) is studying computer science at Brown University (2025) and is minoring in Entrepeneurship.  
+Ilana (inguyen4) is studying computer science at Brown University (2026).  
+Alex (ahogue1) is studying computer science and visual arts at Brown University and the Rhode Island School of Design (RISD) as a dual degree student.
 
 ## Design Choices
 
