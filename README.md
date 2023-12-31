@@ -20,6 +20,15 @@ When the user selects the "generate wellbeing suggestions" button, their journal
 **Accessibility**
 Accessibility features include keyboard shortcuts that make the web app fully accessible to users who cannot use a mouse. 
 Keyboard shortcuts are:
+* ctrl to select/focus on the journal entry input box
+* option to select/focus on the 'submit for suggestions' button
+* enter to submit the 'submit for suggestions' button once it is highlighted
+* ctrl + shift + 1 to check the box for the first suggestion (to mark as completed)
+* ctrl + shift + 2 to check the box for the second suggestion 
+* ctrl + shift + 3 to check the box for the third suggestion
+* left arrow to select the prev button to view previous entries
+* right arrow to select the next button to view the next entry (which will either be blank if currently viewing the most recent entry or saved with the an entry if navigating between prior entries)
+
 
 **Engagement Features** 
 Our stakeholder interviews and lived experiences led us to realize that there is a significant problem with sustained engagement with mental health apps. In addition to the personalzied functionality, we added a cute, random plant graphic that is displayed for each journal entry when the user clicks the generate wellbeing suggestions button. Based on stakeholder suggestions, we sought to create a fun, simple engagement feature that could incentivize sustained use, similar to Plant Nanny.
